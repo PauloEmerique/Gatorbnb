@@ -7,23 +7,24 @@ const ListingResult = props => {
   return (
     <Container>
       {props.results.map(item => (
-        <Link to={`/listing/${item.listing_id}`} key={item.listing_id} target="_blank">
+        <Link to={`/listing/${item.id}`} key={item.id} target="_blank">
         <Card>
           <div>
             <Image src={item.thumbnail} alt="thumbnail"></Image>
           </div>
           <div>
-            <Title>${item.price}</Title>
+            <Title>{item.name}</Title>
             <Type>
               <Circle/>
-              <Span>{item.housing_type}</Span>
+              <Span>{item.caveType}</Span>
             </Type>
             <Details>
-              <Space><Icon name="bed"/>{item.bedroom}bd</Space>
-              <Space><Icon name="bath"/>{item.bathroom}ba</Space>
-              {item.squarefoot} sqft
+              <Space><Icon name="bed"/>{item.description}</Space>
+              <Space><Icon name="bath"/>{item.city}</Space>
+              {item.lat} 
+              {item.lon}
             </Details>
-            <Address>{item.address}, {item.zipcode}</Address>
+            <Address>{item.address}, {item.visitAdress}</Address>
           </div>
         </Card>
         </Link>

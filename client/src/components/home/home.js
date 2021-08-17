@@ -84,31 +84,34 @@ class Home extends Component {
   }
 
   getListings = (value) => {
-    axios.get(`/api/listing/search/${value}`)
+    axios.get(`http://192.168.15.142:8080/api/search/${value}`)
       .then(res => {
         if (res.data.length === 0) {
           this.setState({ noResults: true})
         }
         else {
           let listingsTemp = res.data
-          let temp = []
-          listingsTemp.forEach(list => {
-            if (list.confirmation === true) {
-              temp.push(list)
-            }
+          this.setState({
+              listings: listingsTemp
           })
-          temp.forEach(list => {
-            axios.get(`/api/listing/photos/${list.listing_id}`)
-              .then(res => {
-                list.thumbnail = res.data[0].photo_url
-                this.setState({
-                  listings: temp
-                })
-              })
-              .catch(err => {
-                console.log(err)
-              })
-          })
+          // let temp = []
+          // listingsTemp.forEach(list => {
+          //   if (list.confirmation === true) {
+          //     temp.push(list)
+          //   }
+          // })
+          // temp.forEach(list => {
+          //   axios.get(`http://192.168.15.142:8080/api/photos/${list.listing_id}`)
+          //     .then(res => {
+          //       list.thumbnail = res.data[0].photo_url
+          //       this.setState({
+          //         listings: temp
+          //       })
+          //     })
+          //     .catch(err => {
+          //       console.log(err)
+          //     })
+          // })
         }
       })
       .catch(err => {
