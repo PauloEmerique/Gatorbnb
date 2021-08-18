@@ -276,11 +276,11 @@ class Home extends Component {
     } else {
       return (
         <>
-          <NavBar queue={this.state.queue} changeQueue={this.changeQueue} />
+          {/* <NavBar queue={this.state.queue} changeQueue={this.changeQueue} />
           <Filter {...props} />
           <Container>
             <ListingResult results={this.state.listings}/>
-          </Container>
+          </Container> */}
         </>
       )
     }

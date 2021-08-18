@@ -1,13 +1,24 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 import { Button, Input } from 'semantic-ui-react'
 import styled from 'styled-components'
 import About from './navbar/about'
-import logo from './navbar/img/logo.png'
+import logo from './navbar/img/logo-ecaves.png'
+import Background from './home/assets/brazilian-landscape.jpg'
+import ListingResult from './home/listingResult'
 
 const Container = styled.div`
-  background-color: #330033;
+  // background-color: #330033;
   width: 100%;
   height: 80vh;
+  background-image: url(${Background});
+`
+
+const ListingContainer = styled.div`
+  // background-color: #330033;
+  width: 100%;
+  height: 80vh;
+  // background-image: url(${Background});
 `
 
 const Nav = styled.div`
@@ -19,7 +30,7 @@ const Nav = styled.div`
 `
 
 const LeftColumn = styled.div`
-  width: 70px;
+  // width: 70px;
 `
 
 const MiddleColumn = styled.div`
@@ -89,7 +100,32 @@ export default class Landing extends Component {
     user_id: localStorage.getItem('user_id'),
     isAuth: localStorage.getItem('isAuth'),
     isAdmin: localStorage.getItem('isAdmin'),
+    listings: [],
+    noResults: false,
   }
+
+  componentDidMount() {
+    // ReactGA.initialize('UA-140468325-1', {
+    // 'cookieDomain': 'auto',
+    // 'debug': true
+    // });
+    // ReactGA.initialize('UA-140468325-1');
+    // ReactGA.pageview(window.location.pathname + window.location.search)
+    // const query = this.props.location.search
+    // const parsed = queryString.parse(query);
+
+    // this.setState({
+    //   queue: parsed.queue,
+    //   type: parsed.type,
+    //   beds: parsed.beds,
+    //   baths: parsed.baths,
+    //   priceMax: parsed.priceMax,
+    //   distanceMax: parsed.distanceMax,
+    // })
+
+    this.getListings()
+  }
+
 
   handleSearch = e => {
     e.preventDefault()
@@ -104,6 +140,43 @@ export default class Landing extends Component {
     localStorage.removeItem('isAdmin')
     this.props.history.push('/login')
   }
+
+  getListings = (value) => {
+    axios.get(`http://192.168.15.142:8080/api/search/${value}`)
+      .then(res => {
+        if (res.data.length === 0) {
+          this.setState({ noResults: true})
+        }
+        else {
+          let listingsTemp = res.data
+          this.setState({
+              listings: listingsTemp
+          })
+          // let temp = []
+          // listingsTemp.forEach(list => {
+          //   if (list.confirmation === true) {
+          //     temp.push(list)
+          //   }
+          // })
+          // temp.forEach(list => {
+          //   axios.get(`http://192.168.15.142:8080/api/photos/${list.listing_id}`)
+          //     .then(res => {
+          //       list.thumbnail = res.data[0].photo_url
+          //       this.setState({
+          //         listings: temp
+          //       })
+          //     })
+          //     .catch(err => {
+          //       console.log(err)
+          //     })
+          // })
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
 
   getNav = () => {
     if (this.state.isAdmin === 'true') {
@@ -140,33 +213,33 @@ export default class Landing extends Component {
         <Container>
           <Nav>
             <LeftColumn>
-              <Image src={logo} height="45" width="45" alt="logo" />
+              <Image src={logo} height="38" width="216" alt="logo" />
             </LeftColumn>
-            <MiddleColumn>
-              <Title>Gatorbnb</Title>
-            </MiddleColumn>
             <RightColumn>
               <Wrapper>
                 {this.getNav()}
               </Wrapper>
             </RightColumn>
           </Nav>
-          <Header>Welcome to Gatorbnb</Header>
-          <Description>Housing for SFSU students</Description>
+          <Header>Welcome to eCaves</Header>
+          <Description>Go ahead and discover the Caves world</Description>
           <Search>
             <form onSubmit={this.handleSearch}>
               <Input size='massive' action={{ icon: 'search' }} name="search" placeholder='Enter a city or ZIP code' style={{width: '100%'}} />
             </form>
           </Search>
         </Container>
+        <ListingContainer>
+            <ListingResult results={this.state.listings}/>
+          </ListingContainer>
         <Footer>
-          <Disclaimer>DISCLAIMER</Disclaimer>
+          {/* <Disclaimer>DISCLAIMER</Disclaimer>
           <Para>Gatorbnb is a website <b>NOT</b> intended for commercial purposes. We do not ask for any type of payment in any shape or form. 
             This website is for educational purposes only and only stimulates a website where SFSU students can find a place to rent. 
             The information on this website is fictional, however uses actual locations and pictures of housing. Any similarities 
-            are completely coincidental. SFSU Software Engineering Project CSC 648-848, Spring 2019. For Demonstration only.</Para>
+            are completely coincidental. SFSU Software Engineering Project CSC 648-848, Spring 2019. For Demonstration only.</Para> */}
         </Footer>
-        <About />
+        {/* <About /> */}
       </>
     )
   }

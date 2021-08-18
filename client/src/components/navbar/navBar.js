@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 import { Dropdown } from 'react-bootstrap'
 import { Input } from 'semantic-ui-react'
 import { Container, Image, Title, List, Link, Nav, ImageMobile, StyledDropdown, LeftColumn, MiddleColumn, RightColumn, LeftMobile, MiddleMobile, RightMobile, StyledButton } from './navBarStyle'
-import logo from './img/logo.png'
+import logo from './img/logo-ecaves.png'
 
 const inputStyle = {
   width: '400px',
