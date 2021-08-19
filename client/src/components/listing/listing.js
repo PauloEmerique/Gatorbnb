@@ -33,7 +33,7 @@ class Listing extends Component {
     window.scrollTo(0, 0)
     const { handle } = this.props.match.params
     this.getListing(handle)
-    this.getTags(handle)
+    // this.getTags(handle)
   }
 
   componentWillMount() {
@@ -49,21 +49,21 @@ class Listing extends Component {
   }
 
   getListing = (handle) => {
-    axios.get(`/api/listing/retrieve/${handle}`)
+    axios.get(`http://192.168.15.142:8080/api/cave/${handle}`)
       .then(res => {
         this.setState({
           listing: res.data
         })
-        axios.get(`/api/listing/photos/${res.data.listing_id}`)
-          .then(res => {
-            this.setState({
-              loading: false,
-              photos: res.data
-            })
-          })
-          .catch(err => {
-            console.log(err)
-          })
+        // axios.get(`/api/listing/photos/${res.data.listing_id}`)
+        //   .then(res => {
+        //     this.setState({
+        //       loading: false,
+        //       photos: res.data
+        //     })
+        //   })
+        //   .catch(err => {
+        //     console.log(err)
+        //   })
       })
       .catch(err => {
         console.log(err)

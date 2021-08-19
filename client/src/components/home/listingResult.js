@@ -10,7 +10,7 @@ const ListingResult = props => {
         <Link to={`/listing/${item.id}`} key={item.id} target="_blank">
         <Card>
           <div>
-            <Image src={item.thumbnail} alt="thumbnail"></Image>
+            {item.images.length>0 ? <Image src={`http://192.168.15.142:8080/api/grabImg/${item.images[0].id}`} alt="thumbnail"></Image> : <Span>No Images</Span> }
           </div>
           <div>
             <Title>{item.name}</Title>

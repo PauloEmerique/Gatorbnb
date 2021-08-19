@@ -12,6 +12,9 @@ const Container = styled.div`
   width: 100%;
   height: 80vh;
   background-image: url(${Background});
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 `
 
 const ListingContainer = styled.div`
