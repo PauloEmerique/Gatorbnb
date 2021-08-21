@@ -14,13 +14,21 @@ export const Link = styled(NavLink)`
 `
 
 export const Card = styled.div`
-  width: 280;
+  width: 560;
   display: inline-block;
   margin: 20px 20px 20px 20px;
   padding-bottom: 15px;
   border-radius: 10px;
   background-color: white;
   box-shadow: 0px 1px 2px grey; 
+`
+
+export const DivLeft = styled.div`
+  width: 280;
+  display: inline-block;
+  margin: 20px 20px 20px 20px;
+  padding-bottom: 15px;
+  float: left;
 `
 
 export const Image = styled.img`

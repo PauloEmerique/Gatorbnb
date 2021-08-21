@@ -145,7 +145,7 @@ export default class Landing extends Component {
   }
 
   getListings = (value) => {
-    axios.get(`http://192.168.15.142:8080/api/search/${value}`)
+    axios.get(`http://192.168.15.142:8080/api/home/${value}`)
       .then(res => {
         if (res.data.length === 0) {
           this.setState({ noResults: true})
@@ -234,11 +234,7 @@ export default class Landing extends Component {
             <ListingResult results={this.state.listings}/>
           </ListingContainer>
         <Footer>
-          {/* <Disclaimer>DISCLAIMER</Disclaimer>
-          <Para>Gatorbnb is a website <b>NOT</b> intended for commercial purposes. We do not ask for any type of payment in any shape or form. 
-            This website is for educational purposes only and only stimulates a website where SFSU students can find a place to rent. 
-            The information on this website is fictional, however uses actual locations and pictures of housing. Any similarities 
-            are completely coincidental. SFSU Software Engineering Project CSC 648-848, Spring 2019. For Demonstration only.</Para> */}
+          <Para>eCaves - todos os direitos reservados </Para>
         </Footer>
         {/* <About /> */}
       </>
