@@ -14,7 +14,7 @@ export const Link = styled(NavLink)`
 `
 
 export const Card = styled.div`
-  width: 280px;
+  width: 280;
   display: inline-block;
   margin: 20px 20px 20px 20px;
   padding-bottom: 15px;
@@ -78,4 +78,13 @@ export const Circle = styled.span`
 export const Span = styled.span`
   padding-right: 10px;
   color: #595959;
+`
+
+export const Icon = styled.span`
+  height: 10px;
+  width: 10px;
+  margin-right: 5px;
+  border-radius: 50%;
+  background-color: green; 
+  display: inline-block;
 `

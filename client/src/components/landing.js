@@ -193,7 +193,6 @@ export default class Landing extends Component {
     if (this.state.isAdmin === 'false') {
       return (
         <>
-          <Button style={{margin: '5px'}} onClick={() => {this.props.history.push('/post')}} inverted>Post</Button>
           <Button style={{margin: '5px'}} onClick={() => {this.props.history.push('/mylistings')}} inverted>Dashboard</Button>
           <Button style={{margin: '5px'}} onClick={this.logOut} inverted>Log Out</Button>
         </>
@@ -202,7 +201,6 @@ export default class Landing extends Component {
     if (this.state.isAdmin === null) {
       return (
         <> 
-          <Button style={{margin: '5px'}} onClick={() => {this.props.history.push('/post')}} inverted>Post</Button>
           <Button style={{margin: '5px'}} onClick={() => {this.props.history.push('/login')}} inverted>Login</Button>
           <Button style={{margin: '5px'}} onClick={() => {this.props.history.push('/register')}} inverted>Sign Up</Button>
         </>

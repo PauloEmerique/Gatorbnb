@@ -159,7 +159,7 @@ class NavBar extends Component {
         <Container>
           <LeftColumn>
             <Nav to="/"><Image src={logo} height="45" width="45" alt="logo"/></Nav>
-            <Nav to="/"><Title>Gatorbnb</Title></Nav>
+            <Nav to="/"><Title>eCaves</Title></Nav>
           </LeftColumn>
           <MiddleColumn>
             <form onSubmit={this.handleSearch}>

@@ -1,7 +1,9 @@
 import React from 'react'
 import { withRouter }  from 'react-router'
-import { Icon } from 'semantic-ui-react'
-import { Container, Link, Card, Image, Title, Type, Details, Address, Circle, Space, Span } from './listingResultStyle'
+// import { Icon } from 'semantic-ui-react'
+import { Container, Link, Card, Image, Title, Type, Details, Address, Circle, Space, Span, Icon } from './listingResultStyle'
+import clockSVG from '../../assets/images/icon-clock.svg'
+import helmetSVG from '../../assets/images/icon-helmet.svg'
 
 const ListingResult = props => {
   return (
@@ -21,8 +23,9 @@ const ListingResult = props => {
             <Details>
               <Space><Icon name="bed"/>{item.description}</Space>
               <Space><Icon name="bath"/>{item.city}</Space>
-              {item.lat} 
-              {item.lon}
+                <img src={clockSVG} alt="Icon chat" width = "15px" heigth = "15px"/>
+                <img src={helmetSVG} alt="Icon helmet" width = "15px" heigth = "15px"/>
+              
             </Details>
             <Address>{item.address}, {item.visitAdress}</Address>
           </div>
