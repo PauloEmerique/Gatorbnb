@@ -76,7 +76,7 @@ class NavBar extends Component {
     if (this.state.isAdmin === null) {
       return (
         <>
-          <Link><Nav to="/post">Post</Nav></Link>
+          {/* <Link><Nav to="/post">Post</Nav></Link> */}
           <Link><Nav to="/login">Login</Nav></Link>
           <Link><Nav to="/register">Sign Up</Nav></Link>
         </>
@@ -159,7 +159,7 @@ class NavBar extends Component {
         <Container>
           <LeftColumn>
             <Nav to="/"><Image src={logo} height="45" width="45" alt="logo"/></Nav>
-            <Nav to="/"><Title>eCaves</Title></Nav>
+            {/* <Nav to="/"><Title>eCaves</Title></Nav> */}
           </LeftColumn>
           <MiddleColumn>
             <form onSubmit={this.handleSearch}>

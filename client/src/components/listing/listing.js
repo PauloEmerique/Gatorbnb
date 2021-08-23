@@ -253,7 +253,7 @@ class Listing extends Component {
                 <Placeholder.Image />
               </Placeholder>
             ) : (
-              <Image src={this.state.photos[0].photo_url} onClick={this.handleSlider}/>
+              <Image src={`http://192.168.15.142:8080/api/grabImg/${this.state.listing[0].images[0].id}`} onClick={this.handleSlider}/>
             )}
           </Images>
           <Overview>Overview</Overview>
@@ -306,7 +306,6 @@ class Listing extends Component {
         </Modal>
       </Container>
       <Footer>
-        SFSU Software Engineering Project CSC 648-848, Spring 2019. For Demonstration only
       </Footer>
       </>
     )

@@ -144,8 +144,8 @@ export default class Landing extends Component {
     this.props.history.push('/login')
   }
 
-  getListings = (value) => {
-    axios.get(`http://192.168.15.142:8080/api/home/${value}`)
+  getListings = () => {
+    axios.get(`http://192.168.15.142:8080/api/home/`)
       .then(res => {
         if (res.data.length === 0) {
           this.setState({ noResults: true})
@@ -222,8 +222,8 @@ export default class Landing extends Component {
               </Wrapper>
             </RightColumn>
           </Nav>
-          <Header>Welcome to eCaves</Header>
-          <Description>Go ahead and discover the Caves world</Description>
+          <Header></Header>
+          {/* <Description>Go ahead and discover the Caves world</Description> */}
           <Search>
             <form onSubmit={this.handleSearch}>
               <Input size='massive' action={{ icon: 'search' }} name="search" placeholder='Enter a city or ZIP code' style={{width: '100%'}} />
@@ -233,9 +233,9 @@ export default class Landing extends Component {
         <ListingContainer>
             <ListingResult results={this.state.listings}/>
           </ListingContainer>
-        <Footer>
+        {/* <Footer>
           <Para>eCaves - todos os direitos reservados </Para>
-        </Footer>
+        </Footer> */}
         {/* <About /> */}
       </>
     )

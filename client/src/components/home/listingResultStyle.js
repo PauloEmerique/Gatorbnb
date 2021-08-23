@@ -14,20 +14,21 @@ export const Link = styled(NavLink)`
 `
 
 export const Card = styled.div`
-  width: 560;
+  width: 40%;
+  heigth: 10%;
   display: inline-block;
   margin: 20px 20px 20px 20px;
   padding-bottom: 15px;
   border-radius: 10px;
   background-color: white;
-  box-shadow: 0px 1px 2px grey; 
+  box-shadow: 0px 4px 8px grey; 
 `
 
 export const DivLeft = styled.div`
-  width: 280;
+  width: 40%;
+  heigth: 40%
   display: inline-block;
-  margin: 20px 20px 20px 20px;
-  padding-bottom: 15px;
+  margin: 5px 5px 5px 15px;
   float: left;
 `
 
@@ -36,26 +37,29 @@ export const Image = styled.img`
   height: 150px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  border: 1px solid #dfdfdf;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border: 2px solid #dfdfdf;
 `
 
 export const Title = styled.div`
   font-weight: bold;
-  font-size: 15px;
+  font-size: 20px;
   text-align: left
   padding-top: 15px;
-  padding-bottom: 15px;
+  padding-bottom: 10px;
   padding-left: 15px;
-  width: 50%;
+  width: 100%;
   display: inline-block;
 `
 
 export const Type = styled.div`
-  width: 50%;
-  padding-top: 15px;
+  width: 100%;
+  padding-left: 15px;
+  // padding-top: 15px;
   padding-bottom: 15px;
   display: inline-block;
-  text-align: right;
+  text-align: left;
 `
 
 export const Details = styled.p`  
@@ -75,8 +79,8 @@ export const Space = styled.span`
 `
 
 export const Circle = styled.span`
-  height: 10px;
-  width: 10px;
+  height: 8px;
+  width: 8px;
   margin-right: 5px;
   border-radius: 50%;
   background-color: green; 
@@ -89,8 +93,8 @@ export const Span = styled.span`
 `
 
 export const Icon = styled.span`
-  height: 10px;
-  width: 10px;
+  height: 8px;
+  width: 8px;
   margin-right: 5px;
   border-radius: 50%;
   background-color: green; 

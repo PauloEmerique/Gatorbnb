@@ -15,10 +15,13 @@ export const Container = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
+  height: 100%;
+  width: 100%;
 `
 
 export const StyledContainer = styled.div`
-  width: 350px;
+  width: 175px;
+  heigth: 175px;
 `
 
 export const Title = styled.div`
@@ -32,7 +35,7 @@ export const Title = styled.div`
 
 export const Image = styled.img`
   cursor: pointer;
-  width: 520px;
+  width: 120;
   display: block;
   margin: auto;
   :hover {
@@ -43,6 +46,7 @@ export const Image = styled.img`
 export const Images = styled.div`
   padding-top: 15px;
 `
+  // heigth: 250px;
 
 export const Overview = styled.div`
   font-size: 22px;
@@ -107,7 +111,7 @@ export const Button = styled.div`
 `
 
 export const Footer = styled.div`
-  background-color: #330033;
+  background-color: #00000000;
   height: 95px;
   margin-top: 15px;
   color: white;
