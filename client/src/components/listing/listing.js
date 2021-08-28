@@ -9,6 +9,20 @@ import Leaflet from './leaflet'
 import Slider from './slider'
 import axios from 'axios'
 
+// informacoes
+import clockSVG from '../../assets/images/icon-clock.svg'
+import helmetSVG from '../../assets/images/icon-helmet.svg'
+import lampSVG from '../../assets/images/icon-lamp.svg'
+import informationSVG from '../../assets/images/icon-information.svg'
+import facilitySVG from '../../assets/images/icon-facility.svg'
+import toiletSVG from '../../assets/images/icon-toilet.svg'
+
+// atividades
+import trekkingSVG from '../../assets/images/icon-trekking.svg'
+import explorerSVG from '../../assets/images/icon-explorer.svg'
+import speleothemSVG from '../../assets/images/icon-speleothem.svg'
+import waterfallSVG from '../../assets/images/icon-waterfall.svg'
+
 const style = {
   position: 'static'
 }
@@ -49,7 +63,7 @@ class Listing extends Component {
   }
 
   getListing = (handle) => {
-    axios.get(`http://192.168.15.142:8080/api/cave/${handle}`)
+    axios.get(`http://power.esensetec.com.br:9999/ecaves/api/cave/${handle}`)
       .then(res => {
         this.setState({
           listing: res.data
@@ -253,15 +267,22 @@ class Listing extends Component {
                 <Placeholder.Image />
               </Placeholder>
             ) : (
-              <Image src={`http://192.168.15.142:8080/api/grabImg/${this.state.listing[0].images[0].id}`} onClick={this.handleSlider}/>
+              <Image src={`http://power.esensetec.com.br:9999/ecaves/api/grabImg/${this.state.listing[0].images[0].id}`} onClick={this.handleSlider}/>
             )}
           </Images>
-          <Overview>Overview</Overview>
-            <Details><Icon name="building"/>{this.state.listing.housing_type}</Details>
-            <Details><Icon name="bed"/>{this.state.listing.bedroom} Bedrooms</Details>
-            <Details><Icon name="bath"/>{this.state.listing.bathroom} Bathrooms</Details>
-            <Details><Icon name="square"/>{this.state.listing.squarefoot} sqft</Details>
-            <Details><Icon name="car"/>{this.state.listing.distance} miles from SFSU</Details>
+          
+          <Overview>Informações</Overview>
+            <Details><img src={clockSVG} alt="Icon chat" width = "15px" heigth = "15px"/></Details>
+            <Details><img src={helmetSVG} alt="Icon helmet" width = "15px" heigth = "15px"/></Details>
+            <Details><img src={lampSVG} alt="Icon lamp" width = "15px" heigth = "15px"/></Details>
+            <Details><img src={informationSVG} alt="Icon information" width = "15px" heigth = "15px"/></Details>
+            <Details><img src={facilitySVG} alt="Icon facility" width = "15px" heigth = "15px"/></Details>
+            <Details><img src={toiletSVG} alt="Icon toilet" width = "15px" heigth = "15px"/></Details>
+          <Overview>Atividades</Overview>
+            <Details><img src={trekkingSVG} alt="Icon trekking" width = "15px" heigth = "15px"/></Details>
+            <Details><img src={explorerSVG} alt="Icon explorer" width = "15px" heigth = "15px"/></Details>
+            <Details><img src={speleothemSVG} alt="Icon speleothem" width = "15px" heigth = "15px"/></Details>
+            <Details><img src={waterfallSVG} alt="Icon waterfall" width = "15px" heigth = "15px"/></Details>
           <Overview>Description</Overview>
             <Description>
               <Para>{this.state.listing.description}</Para>
@@ -269,7 +290,7 @@ class Listing extends Component {
         </LeftColumn>
         <StyledContainer>
         <RightColumn>
-          <Button variant="success" size="lg" onClick={this.handleShow} block>Message</Button>
+          {/* <Button variant="success" size="lg" onClick={this.handleShow} block>Message</Button> */}
           <Map>
             <Leaflet />
           </Map>

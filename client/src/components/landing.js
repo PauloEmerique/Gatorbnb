@@ -145,7 +145,7 @@ export default class Landing extends Component {
   }
 
   getListings = () => {
-    axios.get(`http://192.168.15.142:8080/api/home/`)
+    axios.get(`http://power.esensetec.com.br:9999/ecaves/api/home/`)
       .then(res => {
         if (res.data.length === 0) {
           this.setState({ noResults: true})
@@ -162,7 +162,7 @@ export default class Landing extends Component {
           //   }
           // })
           // temp.forEach(list => {
-          //   axios.get(`http://192.168.15.142:8080/api/photos/${list.listing_id}`)
+          //   axios.get(`http://power.esensetec.com.br:9999/ecaves/api/photos/${list.listing_id}`)
           //     .then(res => {
           //       list.thumbnail = res.data[0].photo_url
           //       this.setState({
