@@ -8,7 +8,8 @@ import logo from './img/logo-ecaves.png'
 const inputStyle = {
   width: '400px',
   paddingTop: '9px',
-  paddingBottom: '8px'
+  paddingBottom: '8px',
+  paddingLeft: '100px'
 }
 
 const mobileStyle = {
@@ -131,7 +132,7 @@ class NavBar extends Component {
       return (
         <Container>
           <LeftMobile>
-            <Nav to="/"><ImageMobile src={logo} height="45" width="45" alt="logo"/></Nav>
+            <Nav to="/"><ImageMobile src={logo} height="45"  alt="logo"/></Nav>
           </LeftMobile>
           <MiddleMobile>
             <form onSubmit={this.handleSearch}>
@@ -140,7 +141,7 @@ class NavBar extends Component {
                 size='large'
                 action={{ icon: 'search' }} 
                 name="search"
-                placeholder='City or ZIP code' 
+                placeholder='Cidade, Caverna ou Parque' 
                 value={this.props.queue}
                 onChange={this.props.changeQueue}
                 maxLength="40"
@@ -158,7 +159,7 @@ class NavBar extends Component {
       return (
         <Container>
           <LeftColumn>
-            <Nav to="/"><Image src={logo} height="45" width="45" alt="logo"/></Nav>
+            <Nav to="/"><Image src={logo} height="45" alt="logo"/></Nav>
             {/* <Nav to="/"><Title>eCaves</Title></Nav> */}
           </LeftColumn>
           <MiddleColumn>
@@ -168,7 +169,7 @@ class NavBar extends Component {
                 size='large'
                 action={{ icon: 'search' }} 
                 name="search"
-                placeholder='Enter a city or ZIP code' 
+                placeholder='Cidade, Caverna ou Parque' 
                 value={this.props.queue}
                 onChange={this.props.changeQueue}
                 maxLength="40"

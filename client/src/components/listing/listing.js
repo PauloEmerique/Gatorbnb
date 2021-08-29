@@ -315,7 +315,7 @@ class Listing extends Component {
                 <Placeholder.Image />
               </Placeholder>
             ) : (
-              <Image style={{ width: '600px', margin: 'auto'}} src={`http://power.esensetec.com.br:9999/ecaves/api/grabImg/${this.state.listing.images[0].id}`} onClick={this.handleSlider}/>
+              <Image style={{ width: '600px', margin: 'auto'}} src={`http://power.esensetec.com.br:9999/ecaves/api/grabImg/${this.state.listing.images.length>0?this.state.listing.images[0].id:null}`} onClick={this.handleSlider}/>
             )}
           </Images>
           
@@ -324,7 +324,7 @@ class Listing extends Component {
           <Overview>Atividades</Overview>
             {this.showInfos(this.state.listing,"atividades")}
             {this.showInfos(this.state.listing,"acesso")}
-          <Overview>Description</Overview>
+          <Overview>Descrição</Overview>
             <Description>
               <Para>{this.state.listing.description}</Para>
             </Description>
