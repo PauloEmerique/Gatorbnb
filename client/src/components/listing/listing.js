@@ -10,13 +10,12 @@ import Slider from './slider'
 import axios from 'axios'
 
 // informacoes
-import clockSVG from '../../assets/images/icon-clock.svg'
 import helmetSVG from '../../assets/images/icon-helmet.svg'
+import clockSVG from '../../assets/images/icon-clock.svg'
 import lampSVG from '../../assets/images/icon-lamp.svg'
 import informationSVG from '../../assets/images/icon-information.svg'
 import facilitySVG from '../../assets/images/icon-facility.svg'
 import toiletSVG from '../../assets/images/icon-toilet.svg'
-
 // atividades
 import trekkingSVG from '../../assets/images/icon-trekking.svg'
 import explorerSVG from '../../assets/images/icon-explorer.svg'
