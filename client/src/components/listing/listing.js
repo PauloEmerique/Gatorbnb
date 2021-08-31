@@ -65,7 +65,8 @@ class Listing extends Component {
     axios.get(`http://power.esensetec.com.br:9999/ecaves/api/cave/${handle}`)
       .then(res => {
         this.setState({
-          listing: res.data
+          listing: res.data,
+          loading: false,
         })
         // axios.get(`/api/listing/photos/${res.data.listing_id}`)
         //   .then(res => {
@@ -152,6 +153,53 @@ class Listing extends Component {
       .catch(err => {
          console.log(err.response.data)
       })
+  }
+
+  getIcon = (info) => {
+    console.log(info)
+    if (info["name"]==="Guia") {
+      return <Details><img src={trekkingSVG} alt={info.name} width = "15px" heigth = "15px"/>{info["description"]}</Details>
+    } 
+    if (info["name"]==="Picnic") {
+      return <Details><img src={clockSVG} alt={info.name} width = "15px" heigth = "15px"/>{info["description"]}</Details>
+    } 
+    if (info["name"]==="Centro de Visitantes") {
+      return <Details><img src={helmetSVG} alt={info.name} width = "15px" heigth = "15px"/>{info["description"]}</Details>
+    } 
+    if (info["name"]==="WC") {
+      return <Details><img src={toiletSVG} alt={info.name} width = "15px" heigth = "15px"/>{info["description"]}</Details>
+    } 
+    if (info["name"]==="Lanterna") {
+      return <Details><img src={lampSVG} alt={info.name} width = "15px" heigth = "15px"/>{info["description"]}</Details>
+    } 
+    if (info["name"]==="Contemplação") {
+      return <Details><img src={informationSVG} alt={info.name} width = "15px" heigth = "15px"/>{info["description"]}</Details>
+    } 
+    if (info["name"]==="Caminhada") {
+      return <Details><img src={facilitySVG} alt={info.name} width = "15px" heigth = "15px"/>{info["description"]}</Details>
+    } 
+    return null
+  }
+
+  // <Details><img src={trekkingSVG} alt="Icon trekking" width = "15px" heigth = "15px"/></Details>
+  // <Details><img src={explorerSVG} alt="Icon explorer" width = "15px" heigth = "15px"/></Details>
+  // <Details><img src={speleothemSVG} alt="Icon speleothem" width = "15px" heigth = "15px"/></Details>
+  // <Details><img src={waterfallSVG} alt="Icon waterfall" width = "15px" heigth = "15px"/></Details>
+
+  showInfos = (cave, category) => {
+    console.log(cave.name);
+    if (cave.infos==null) return null;
+    const infos=cave.infos.filter(function(item){ return item["category"]===category;});
+    if (infos.length===0) {
+      return null 
+    } else {
+      return (
+        infos.map(item => (
+                  this.getIcon(item)
+                  )
+        )
+      )
+    }
   }
 
   render() {
@@ -257,7 +305,7 @@ class Listing extends Component {
                 </Placeholder.Header>
               </Placeholder>
             ) : (
-              <>${this.state.listing.price} {this.state.listing.address}, {this.state.listing.zipcode}</>
+              <>{this.state.listing.name}</>
             )}
           </Title>
           <Images>
@@ -266,23 +314,16 @@ class Listing extends Component {
                 <Placeholder.Image />
               </Placeholder>
             ) : (
-              <Image src={`http://power.esensetec.com.br:9999/ecaves/api/grabImg/${this.state.listing[0].images[0].id}`} onClick={this.handleSlider}/>
+              <Image style={{ width: '600px', margin: 'auto'}} src={`http://power.esensetec.com.br:9999/ecaves/api/grabImg/${this.state.listing.images.length>0?this.state.listing.images[0].id:null}`} onClick={this.handleSlider}/>
             )}
           </Images>
           
           <Overview>Informações</Overview>
-            <Details><img src={clockSVG} alt="Icon chat" width = "15px" heigth = "15px"/></Details>
-            <Details><img src={helmetSVG} alt="Icon helmet" width = "15px" heigth = "15px"/></Details>
-            <Details><img src={lampSVG} alt="Icon lamp" width = "15px" heigth = "15px"/></Details>
-            <Details><img src={informationSVG} alt="Icon information" width = "15px" heigth = "15px"/></Details>
-            <Details><img src={facilitySVG} alt="Icon facility" width = "15px" heigth = "15px"/></Details>
-            <Details><img src={toiletSVG} alt="Icon toilet" width = "15px" heigth = "15px"/></Details>
+            {this.showInfos(this.state.listing,"facilidades")}
           <Overview>Atividades</Overview>
-            <Details><img src={trekkingSVG} alt="Icon trekking" width = "15px" heigth = "15px"/></Details>
-            <Details><img src={explorerSVG} alt="Icon explorer" width = "15px" heigth = "15px"/></Details>
-            <Details><img src={speleothemSVG} alt="Icon speleothem" width = "15px" heigth = "15px"/></Details>
-            <Details><img src={waterfallSVG} alt="Icon waterfall" width = "15px" heigth = "15px"/></Details>
-          <Overview>Description</Overview>
+            {this.showInfos(this.state.listing,"atividades")}
+            {this.showInfos(this.state.listing,"acesso")}
+          <Overview>Descrição</Overview>
             <Description>
               <Para>{this.state.listing.description}</Para>
             </Description>
@@ -291,12 +332,12 @@ class Listing extends Component {
         <RightColumn>
           {/* <Button variant="success" size="lg" onClick={this.handleShow} block>Message</Button> */}
           <Map>
-            <Leaflet />
+            <Leaflet lat={this.state.listing.lat} lon={this.state.listing.lon}/>
           </Map>
-          <TagsTitle>Tags</TagsTitle>
+          {/* <TagsTitle>Tags</TagsTitle>
           <TagContainer>
             {this.showTags()}
-          </TagContainer>
+          </TagContainer> */}
         </RightColumn>
         </StyledContainer>
         <Modal
