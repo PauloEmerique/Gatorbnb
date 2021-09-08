@@ -5,30 +5,27 @@ import { Container, Title, Label, FilterType, Select, StyledButton } from './fil
 const Filter = props => {
   return (
     <Container>
-    <form onSubmit={props.filterSearch}>
-      <Title>Filter By</Title>
+    {/* <form onSubmit={props.filterSearch}> */}
+    <form onSubmit={console.log('submit')}>
+      <Title>Filtrar Por</Title>
       <Label>
-        <FilterType>Home Type</FilterType>
+        <FilterType>Tipo</FilterType>
         <Select name="type" value={props.type} onChange={props.changeType}>
-          <option value="">Any</option>
-          <option value="apartment">Apartment</option>
-          <option value="house">House</option>
-          <option value="condo">Condo</option>
-          <option value="townhome">Townhome</option>
+          <option value="">Qualquer</option>
+          <option value="apartment">Caverna</option>
+          <option value="house">Parque/UC</option>
         </Select>
       </Label>
       <Label>
-        <FilterType>Bedrooms</FilterType>
-        <Select name="beds" value={props.beds} onChange={props.changeBeds}>
-          <option value="">Any</option>
-          <option value="1">1+</option>
-          <option value="2">2+</option>
-          <option value="3">3+</option>
-          <option value="4">4+</option>
-          <option value="5">5+</option>
+        <FilterType>Dificuldade</FilterType>
+        <Select name="difficulty" value={props.beds} onChange={props.changeBeds}>
+          <option value="">Qualquer</option>
+          <option value="1">Fácil</option>
+          <option value="2">Média</option>
+          <option value="3">Dificil</option>
         </Select>
       </Label>
-      <Label>
+      {/* <Label>
         <FilterType>Bathrooms</FilterType>
         <Select name="baths" value={props.baths} onChange={props.changeBaths}>
           <option value="">Any</option>
@@ -57,28 +54,19 @@ const Filter = props => {
           <option value="7000">$7,000</option>
           <option value="10000">$10,000</option>
         </Select>
-      </Label>
+      </Label> */}
       <Label>
-        <FilterType>Distance from SFSU</FilterType>
+        <FilterType>Distancia</FilterType>
         <Select name="distanceMax" value={props.distanceMax} onChange={props.changeDist}>
-          <option value="">No Max</option>
-          <option value="1">1 mile</option>
-          <option value="2">2 miles</option>
-          <option value="3">3 miles</option>
-          <option value="4">4 miles</option>
-          <option value="5">5 miles</option>
-          <option value="6">6 miles</option>
-          <option value="7">7 miles</option>
-          <option value="8">8 miles</option>
-          <option value="9">9 miles</option>
-          <option value="10">10 miles</option>
-          <option value="15">15 miles</option>
-          <option value="20">20 miles</option>
-          <option value="25">25 miles</option>
+          <option value="">Sem Limite</option>
+          <option value="10">10 KM</option>
+          <option value="50">50 KM</option>
+          <option value="15">100 KM</option>
+          <option value="20">200 KM</option>
         </Select>
       </Label>
       <StyledButton>
-        <Button style={{color: 'black'}}color='yellow' type="submit">Apply Filter</Button>
+        <Button style={{color: 'black'}}color='yellow' type="submit">Aplicar Filtro</Button>
       </StyledButton>
     </form>
     </Container>
