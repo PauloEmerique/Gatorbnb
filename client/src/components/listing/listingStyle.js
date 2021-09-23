@@ -1,31 +1,39 @@
 import styled from 'styled-components'
 
-export const LeftColumn = styled.div`
-  width: 650px;
+export const Column = styled.div`
+  width: 50%;
+  position: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 10px;
+  margin-left: 120px;
+  background-color: white;
 `
 
 export const RightColumn = styled.div`
-  width: 350px;
+  width: 620px;
   position: fixed;
-  margin-left: 20px;
+  float: rigth;
 `
+// NOT USING THE RIGTH COLUMN
 
 export const Container = styled.div`
-  margin-top: 20px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   height: 100%;
   width: 100%;
+  background-color: #E5E5EA
 `
 
 export const StyledContainer = styled.div`
-  width: 175px;
-  heigth: 175px;
+  width: 50%;
+  heigth: 500px;
 `
 
 export const Title = styled.div`
-  text-align: left;
+  text-align: center;
   border-bottom: 1px solid grey;
   font-size: 30px;
   padding-top: 10px;
@@ -35,8 +43,9 @@ export const Title = styled.div`
 
 export const Image = styled.img`
   cursor: pointer;
-  width: 120;
-  display: block;
+  width: 100%;
+  
+  display: fixed;
   margin: auto;
   :hover {
     opacity: 0.85;
@@ -50,12 +59,15 @@ export const Images = styled.div`
 
 export const Overview = styled.div`
   font-size: 22px;
+  width: 100%
   margin: 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid grey;
+  margin: 20px 20px 30px 20px;
 `
 
 export const Details = styled.span`
+  width: 50%;
   font-size: 18px;
   display: block;
   margin: 20px 20px 30px 20px;
@@ -70,7 +82,7 @@ export const Para = styled.p`
 `
 
 export const Map = styled.div`
-  padding-top: 10px;
+  padding-top: px;
   height: 300px;
 `
 
@@ -101,7 +113,7 @@ export const Button = styled.div`
   padding: 15px;
   width: 350px;
   text-align: center;
-  background-color: #330033;
+  background-color: #999999;
   border-radius: 5px;
   box-shadow: 0px 3px 5px grey;
   :hover {
@@ -111,10 +123,9 @@ export const Button = styled.div`
 `
 
 export const Footer = styled.div`
-  background-color: #00000000;
   height: 95px;
   margin-top: 15px;
-  color: white;
+  background-color: grey;
   font-size: 30px;
   padding: 20px;
 `

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Icon, Placeholder } from 'semantic-ui-react'
 import { Modal, Button, Form } from 'react-bootstrap'
 import { withRouter }  from 'react-router'
-import { LeftColumn, RightColumn, Container, StyledContainer, Title, Image, Images, Overview, Details, Description, Para, Map, TagsTitle, Tag, TagContainer, Footer } from './listingStyle'
+import { Column, RightColumn, Container, StyledContainer, Title, Image, Images, Overview, Details, Description, Para, Map, TagsTitle, Tag, TagContainer, Footer } from './listingStyle'
 import { MobileLeftColumn, MobileRightColumn, MobileContainer, MobileStyledContainer, MobileTitle, MobileImage, MobileOverview, MobileDetails, MobilePara } from './listingMobileStyle'
 import NavBar from '../navbar/navBar'
 import Leaflet from './leaflet'
@@ -295,7 +295,7 @@ class Listing extends Component {
       <>
       <NavBar />
       <Container>
-        <LeftColumn>
+        <Column>
           <Title>
             {this.state.loading ? (
               <Placeholder style={style}>
@@ -327,9 +327,9 @@ class Listing extends Component {
             <Description>
               <Para>{this.state.listing.description}</Para>
             </Description>
-        </LeftColumn>
+        </Column>
         <StyledContainer>
-        <RightColumn>
+        <Column>
           {/* <Button variant="success" size="lg" onClick={this.handleShow} block>Message</Button> */}
           <Map>
             <Leaflet lat={this.state.listing.lat} lon={this.state.listing.lon}/>
@@ -338,7 +338,7 @@ class Listing extends Component {
           <TagContainer>
             {this.showTags()}
           </TagContainer> */}
-        </RightColumn>
+        </Column>
         </StyledContainer>
         <Modal
           size="lg"

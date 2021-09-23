@@ -2,23 +2,31 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   position: fixed;
-  top: 65px;
-  width: 240px;
-  background-color: #F1F1F1;
-  height: 1000px;
+  top: 60px;
+  width: 100%;
+  background-color: rgba(240,240,240,1.0);
+  height: 140px; 
+  
 `
 
 export const Title = styled.h1`
   padding-top: 1em;
-  font-size: 1.5em;
+  font-size: 1.2em;
   font-weight: bold;
   text-align: center;
+  position: fixed;
+  
+  top: 60px;
+  width: 100%;
 `
 
 export const Label = styled.label`
-  display: block;
-  margin-top: 1.5em;
-  margin-left: 45px;
+  text-align: center;
+  padding-top: 4em;
+  float: left;
+  margin-left: 120px;
+
+  
 `
 
 export const FilterType = styled.h1`
@@ -35,5 +43,5 @@ export const Input = styled.input`
 
 export const StyledButton = styled.div`
   text-align: center;
-  margin-top: 2em;
+  padding-top: 5.5em;
 `

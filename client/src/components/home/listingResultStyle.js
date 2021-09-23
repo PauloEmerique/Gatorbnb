@@ -14,19 +14,17 @@ export const Link = styled(NavLink)`
 `
 
 export const Card = styled.div`
-  width: 40%;
-  heigth: 10%;
+  width: 600px
+  heigth: 120px;
   display: inline-block;
-  margin: 20px 20px 20px 20px;
-  padding-bottom: 15px;
-  border-radius: 10px;
+  margin: 10px 10px 10px 10px;
   background-color: white;
   box-shadow: 0px 4px 8px grey; 
 `
 
 export const DivLeft = styled.div`
-  width: 40%;
-  heigth: 40%
+  width: 30%;
+  heigth: 30%
   display: inline-block;
   margin: 5px 5px 5px 15px;
   float: left;
