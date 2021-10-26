@@ -4,9 +4,44 @@ import { Button, Input } from 'semantic-ui-react'
 import styled from 'styled-components'
 import About from './navbar/about'
 import logo from './navbar/img/logo-ecaves.png'
-import Background from './home/assets/brazilian-landscape.jpg'
+import Background from './home/assets/gruta-lago_azul_lago_rafael.jpg'
 import ListingResult from './home/listingResult'
+import {appConfig} from '../config/app-config'
 
+
+const StyledButton = styled(Button)`
+  && {
+    background-color: #2761ab;
+    color: white;
+    box-shadow: 0px 3px 5px grey;
+    margin: px;
+    padding: 6px 14px 6px 14px;
+    cursor: pointer;
+    :hover {
+      background-color: #378bf7;
+      color: white;
+      cursor: pointer;
+    }
+  }
+`
+
+const LinkDiv = styled.span`
+  && {
+    ${'' /* background-color: white; */}
+    ${'' /* border-color: white; */}
+    color: #222222;
+    font-size: 15px;
+    font-weight: bold;
+    ${'' /* box-shadow: 0px 3px 5px grey; */}
+    margin: px;
+    padding: 6px 40px 6px 14px;
+    :hover {
+      ${'' /* background-color: #378bf7; */}
+      color: #2761ab;  
+    }
+  }
+`
+// style={{margin: '2px', height:'25px', padding:'1px 10px 1px 10px'}}
 const Container = styled.div`
   // background-color: #330033;
   width: 100%;
@@ -25,11 +60,13 @@ const ListingContainer = styled.div`
 `
 
 const Nav = styled.div`
-  padding-top: 10px;
+  padding-top: 6px;
+  padding-bottom: 6px;
   margin: 0 auto;
   max-width: 1000px;
   display: flex;
   flex-direction: row;
+  background-color: #FFFFFF;
 `
 
 const LeftColumn = styled.div`
@@ -37,14 +74,16 @@ const LeftColumn = styled.div`
 `
 
 const MiddleColumn = styled.div`
-  width: 200px;
+  text-align: center;
+  font-size: 16px;
+  width: 1000px;
   @media (max-width: 500px) {
     display: none;
   }
 `
 
 const RightColumn = styled.div`
-  width: 740px;
+  width: 400px;
 `
 
 const Wrapper = styled.div`
@@ -80,7 +119,8 @@ const Search = styled.div`
 
 const Footer = styled.div`
   padding: 20px;
-  background-color: #ededed;
+  background-color: #2761ab;
+  color: white;
 `
 
 const Disclaimer = styled.h1`
@@ -89,7 +129,7 @@ const Disclaimer = styled.h1`
 `
 
 const Para = styled.p`
-  font-size: 20px;
+  font-size: 12px;
   text-align: center;
 `
 
@@ -145,7 +185,7 @@ export default class Landing extends Component {
   }
 
   getListings = () => {
-    axios.get(`http://power.esensetec.com.br:9999/ecaves/api/home/`)
+    axios.get(`${appConfig.apiEndpoint}/home/`)
       .then(res => {
         if (res.data.length === 0) {
           this.setState({ noResults: true})
@@ -155,24 +195,6 @@ export default class Landing extends Component {
           this.setState({
               listings: listingsTemp
           })
-          // let temp = []
-          // listingsTemp.forEach(list => {
-          //   if (list.confirmation === true) {
-          //     temp.push(list)
-          //   }
-          // })
-          // temp.forEach(list => {
-          //   axios.get(`http://power.esensetec.com.br:9999/ecaves/api/photos/${list.listing_id}`)
-          //     .then(res => {
-          //       list.thumbnail = res.data[0].photo_url
-          //       this.setState({
-          //         listings: temp
-          //       })
-          //     })
-          //     .catch(err => {
-          //       console.log(err)
-          //     })
-          // })
         }
       })
       .catch(err => {
@@ -185,7 +207,7 @@ export default class Landing extends Component {
     if (this.state.isAdmin === 'true') {
       return (
         <>
-          <Button style={{margin: '5px'}} onClick={() => {this.props.history.push('/reviewlistings')}} inverted>Dashboard</Button>
+          {/* <Button style={{margin: '5px'}} onClick={() => {this.props.history.push('/reviewlistings')}} inverted>Dashboard</Button> */}
           <Button style={{margin: '5px'}} onClick={this.logOut} inverted>Log Out</Button>
         </>
       )
@@ -193,19 +215,24 @@ export default class Landing extends Component {
     if (this.state.isAdmin === 'false') {
       return (
         <>
-          <Button style={{margin: '5px'}} onClick={() => {this.props.history.push('/mylistings')}} inverted>Dashboard</Button>
+          {/* <Button style={{margin: '5px'}} onClick={() => {this.props.history.push('/mylistings')}} inverted>Dashboard</Button> */}
           <Button style={{margin: '5px'}} onClick={this.logOut} inverted>Log Out</Button>
         </>
       )
     }
     if (this.state.isAdmin === null) {
       return (
-        <> 
-          <Button style={{margin: '5px'}} onClick={() => {this.props.history.push('/login')}} inverted>Login</Button>
-          <Button style={{margin: '5px'}} onClick={() => {this.props.history.push('/register')}} inverted>Sign Up</Button>
+        <>
+          <LinkDiv style={{margin: '5px'}} onClick={() => {this.blogopen()}}>Blog eCaves</LinkDiv>
+          <StyledButton onClick={() => {this.props.history.push('/login')}} >Entre</StyledButton>
+          {/* <Button style={{margin: '5px'}} onClick={() => {this.props.history.push('/register')}} inverted>Sign Up</Button> */}
         </>
       )
     }
+  }
+
+  blogopen() {
+    window.open("http://ecavesbrasil.com.br", "_ecavesblog")
   }
 
   render() {
@@ -214,28 +241,32 @@ export default class Landing extends Component {
         <Container>
           <Nav>
             <LeftColumn>
-              <Image src={logo} height="38" width="216" alt="logo" />
+              <Image src={logo} height="30" alt="logo" />
             </LeftColumn>
+            <MiddleColumn>
+              <p>Entre e descubra o universo das cavernas e como visitá-las!</p>
+            </MiddleColumn>
             <RightColumn>
               <Wrapper>
                 {this.getNav()}
               </Wrapper>
             </RightColumn>
           </Nav>
-          <Header></Header>
+          {/* <Header></Header> */}
           {/* <Description>Go ahead and discover the Caves world</Description> */}
           <Search>
             <form onSubmit={this.handleSearch}>
-              <Input size='massive' action={{ icon: 'search' }} name="search" placeholder='Enter a city or ZIP code' style={{width: '100%'}} />
+              <Input size='small' action={{ icon: 'search' }} name="search" placeholder='Caverna, Parque ou Cidade' style={{width: '100%'}} />
             </form>
           </Search>
         </Container>
         <ListingContainer>
             <ListingResult results={this.state.listings}/>
-          </ListingContainer>
-        {/* <Footer>
-          <Para>eCaves - todos os direitos reservados </Para>
-        </Footer> */}
+            <Footer>
+              <Para>© 2021 eCaves Inc.·Privacidade·Termos·Mapa do site·Informações da empresa</Para>
+            </Footer>
+        </ListingContainer>
+        
         {/* <About /> */}
       </>
     )

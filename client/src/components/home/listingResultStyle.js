@@ -14,7 +14,7 @@ export const Link = styled(NavLink)`
 `
 
 export const Card = styled.div`
-  width: 600px
+  width: 40%;
   heigth: 120px;
   display: inline-block;
   margin: 10px 10px 10px 10px;
@@ -26,8 +26,33 @@ export const DivLeft = styled.div`
   width: 30%;
   heigth: 30%
   display: inline-block;
-  margin: 5px 5px 5px 15px;
+  margin: 10px 5px 10px 15px;
   float: left;
+`
+
+export const DivInfo = styled.div`
+  width: 60%;
+  heigth: 30%
+  display: inline-block;
+  margin: 10px 5px 10px 15px;
+  float: left;
+`
+
+export const DivData = styled.div`
+  width: 30%;
+  heigth: 30%
+  display: inline-block;
+  margin: 0px 5px 10px 0px;
+  float: left;
+`
+
+export const DataTitle = styled.span`
+  font-size: 10px;
+  font-weight: bold;
+`
+
+export const DataText = styled.span`
+  font-size: 13px;
 `
 
 export const Image = styled.img`
@@ -43,8 +68,8 @@ export const Image = styled.img`
 export const Title = styled.div`
   font-weight: bold;
   font-size: 20px;
-  text-align: left
-  padding-top: 15px;
+  text-align: left;
+  padding-top: 0px;
   padding-bottom: 10px;
   padding-left: 15px;
   width: 100%;
@@ -88,6 +113,21 @@ export const Circle = styled.span`
 export const Span = styled.span`
   padding-right: 10px;
   color: #595959;
+`
+
+export const SpanNoImage = styled.span`
+  padding-right: 10px;
+  color: #595959;
+  height: 50px;
+`
+
+export const Description = styled.div`
+  font-size: 14px;
+  text-align: left;
+  padding-top: 0px;
+  padding-bottom: 10px;
+  width: 100%;
+  display: inline-block;
 `
 
 export const Icon = styled.span`

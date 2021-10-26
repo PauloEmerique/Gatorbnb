@@ -1,0 +1,6 @@
+{
+  "apiEndpoint": "http://localhost:8080/api",
+  "loggingEnabled": true,
+  "loggingLevel": "Error"
+}
+

@@ -7,9 +7,10 @@ import { MobileLeftColumn, MobileRightColumn, MobileContainer, MobileStyledConta
 import NavBar from '../navbar/navBar'
 import Leaflet from './leaflet'
 import Slider from './slider'
+import {appConfig} from '../../config/app-config'
 import axios from 'axios'
 
-// informacoes
+// informacoes dd
 import helmetSVG from '../../assets/images/icon-helmet.svg'
 import clockSVG from '../../assets/images/icon-clock.svg'
 import lampSVG from '../../assets/images/icon-lamp.svg'
@@ -62,10 +63,11 @@ class Listing extends Component {
   }
 
   getListing = (handle) => {
-    axios.get(`http://power.esensetec.com.br:9999/ecaves/api/cave/${handle}`)
+    axios.get(`${appConfig.apiEndpoint}/cave/${handle}`)
       .then(res => {
+        console.log(res.data.results[0])
         this.setState({
-          listing: res.data,
+          listing: res.data.results,
           loading: false,
         })
         // axios.get(`/api/listing/photos/${res.data.listing_id}`)
@@ -85,7 +87,7 @@ class Listing extends Component {
   }
 
   getTags = (handle) => {
-    axios.get(`/api/listing/tags/${handle}`)
+    axios.get(`/api/listing/tagsx/${handle}`)
       .then(res => {
         this.setState({
           tags: res.data
@@ -103,16 +105,20 @@ class Listing extends Component {
   }
 
   showTags = () => {
-    if (this.state.tags.length === 0) {
-      return null 
-    } else {
-      return (
-        this.state.tags.map(item => (
-          <Tag key={item.tag_name}>{item.tag_name}</Tag>
-        ))
-      )
-    }
+    return null
   }
+
+  // showTags = () => {
+  //   if (this.state.tags.length === 0) {
+  //     return null 
+  //   } else {
+  //     return (
+  //       this.state.tags.map(item => (
+  //         <Tag key={item.tag_name}>{item.tag_name}</Tag>
+  //       ))
+  //     )
+  //   }
+  // }
 
   handleClose = () => {
     this.setState({ show: false })
@@ -250,12 +256,13 @@ class Listing extends Component {
             <MobileRightColumn>
               <Button variant="warning" size="lg" onClick={this.handleShow} block>Message</Button>
               <Map>
-                <Leaflet />
+                <Leaflet caves={this.state.listing}/>
               </Map>
-              <TagsTitle>Tags</TagsTitle>
+
+              {/* <TagsTitle>Tags</TagsTitle>
               <TagContainer>
                 {this.showTags()}
-              </TagContainer>
+              </TagContainer> */}
             </MobileRightColumn>
             </MobileStyledContainer>
             <Modal
@@ -305,7 +312,7 @@ class Listing extends Component {
                 </Placeholder.Header>
               </Placeholder>
             ) : (
-              <>{this.state.listing.name}</>
+              <>{this.state.listing[0].name}</>
             )}
           </Title>
           <Images>
@@ -314,25 +321,36 @@ class Listing extends Component {
                 <Placeholder.Image />
               </Placeholder>
             ) : (
-              <Image style={{ width: '600px', margin: 'auto'}} src={`http://power.esensetec.com.br:9999/ecaves/api/grabImg/${this.state.listing.images.length>0?this.state.listing.images[0].id:null}`} onClick={this.handleSlider}/>
+              <Image style={{ width: '600px', margin: 'auto'}} src={`${appConfig.apiEndpoint}/grabImg/${this.state.listing[0].images.length>0?this.state.listing[0].images[0].id:null}`} onClick={this.handleSlider}/>
             )}
           </Images>
           
           <Overview>Informações</Overview>
-            {this.showInfos(this.state.listing,"facilidades")}
+            {this.state.loading ? (
+              null
+            ) : (
+              this.showInfos(this.state.listing[0],"facilidades")
+            )}
           <Overview>Atividades</Overview>
-            {this.showInfos(this.state.listing,"atividades")}
-            {this.showInfos(this.state.listing,"acesso")}
+          {this.state.loading ? (
+              null           
+            ) : (
+              this.showInfos(this.state.listing[0],"atividades") 
+            )}
           <Overview>Descrição</Overview>
             <Description>
-              <Para>{this.state.listing.description}</Para>
+            {this.state.loading ? (
+              null           
+            ) : (
+              <Para>{this.state.listing[0].description}</Para>
+            )}
             </Description>
         </Column>
         <StyledContainer>
         <Column>
           {/* <Button variant="success" size="lg" onClick={this.handleShow} block>Message</Button> */}
           <Map>
-            <Leaflet lat={this.state.listing.lat} lon={this.state.listing.lon}/>
+            <Leaflet caves={this.state.listing}/>
           </Map>
           {/* <TagsTitle>Tags</TagsTitle>
           <TagContainer>
@@ -340,31 +358,6 @@ class Listing extends Component {
           </TagContainer> */}
         </Column>
         </StyledContainer>
-        <Modal
-          size="lg"
-          show={this.state.showSlider}
-          onHide={sliderClose}
-        >
-          <Modal.Header closeButton>
-            <Modal.Title>
-              Photos for {this.state.listing.address}, {this.state.listing.zipcode}
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-              <Slider results={this.state.photos} width="800px" height="450px"/>
-          </Modal.Body>
-        </Modal>
-        <Modal show={this.state.show} onHide={this.handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Send a message</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Form.Control as="textarea" rows="8" onChange={(e) => {this.setState({message: e.target.value})}}/>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="success" size="lg" onClick={this.newMessage} block>Send</Button>
-          </Modal.Footer>
-        </Modal>
       </Container>
       <Footer>
       </Footer>
