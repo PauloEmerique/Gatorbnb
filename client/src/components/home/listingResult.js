@@ -42,9 +42,12 @@ const SectionHeader = styled.div`
 const ListingResult = props => {
   return (
     <>
+    <div align='center'>
+      <LargeBanner src={`http://power.esensetec.com.br:3333/www/delivery/avw.php?zoneid=4&amp;cb=98388238230000&amp;n=aa158028`} alt="apoiadores" ></LargeBanner>
+    </div>
     <SectionHeader>Novidades</SectionHeader>
     <div align='center'>
-      <LargeBanner src={`http://power.esensetec.com.br:3333/www/delivery/avw.php?zoneid=3&amp;cb=98388238232523&amp;n=a8094c9b`} alt="thumbnail" ></LargeBanner>
+      <LargeBanner src={`http://power.esensetec.com.br:3333/www/delivery/avw.php?zoneid=3&amp;cb=98388238232523&amp;n=a8094c9b`} alt="blog" ></LargeBanner>
     </div>
     <Container>
       <SectionHeader>Para Visitar</SectionHeader>
