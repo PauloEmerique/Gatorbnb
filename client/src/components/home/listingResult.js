@@ -45,9 +45,13 @@ const ListingResult = props => {
     <div align='center'>
       <LargeBanner src={`http://power.esensetec.com.br:3333/www/delivery/avw.php?zoneid=4&amp;cb=98388238230000&amp;n=aa158028`} alt="apoiadores" ></LargeBanner>
     </div>
-    <SectionHeader>Novidades</SectionHeader>
+    <SectionHeader>Conheça também...</SectionHeader>
     <div align='center'>
-      <LargeBanner src={`http://power.esensetec.com.br:3333/www/delivery/avw.php?zoneid=3&amp;cb=98388238232523&amp;n=a8094c9b`} alt="blog" ></LargeBanner>
+      <ImageBanner src={`http://power.esensetec.com.br:3333/www/delivery/avw.php?zoneid=1&amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;n=aef84788`} alt="thumbnail" ></ImageBanner>
+      <ImageBanner src={`http://power.esensetec.com.br:3333/www/delivery/avw.php?zoneid=2&amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;n=a0ea7b26`} alt="thumbnail" ></ImageBanner>
+      {/* <Helmet>
+        <a href='http://power.esensetec.com.br:3333/www/delivery/ck.php?n=aef84788&amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'><img src='http://power.esensetec.com.br:3333/www/delivery/avw.php?zoneid=1&amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;n=aef84788' border='0' alt='' /></a>
+      </Helmet> */}
     </div>
     <Container>
       <SectionHeader>Para Visitar</SectionHeader>
@@ -99,13 +103,9 @@ const ListingResult = props => {
         <Leaflet caves={props.results}/>
       </div>
     </Container>
-    <SectionHeader>Conheça também...</SectionHeader>
+    <SectionHeader>Novidades</SectionHeader>
     <div align='center'>
-      <ImageBanner src={`http://power.esensetec.com.br:3333/www/delivery/avw.php?zoneid=1&amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;n=aef84788`} alt="thumbnail" ></ImageBanner>
-      <ImageBanner src={`http://power.esensetec.com.br:3333/www/delivery/avw.php?zoneid=2&amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;n=a0ea7b26`} alt="thumbnail" ></ImageBanner>
-      {/* <Helmet>
-        <a href='http://power.esensetec.com.br:3333/www/delivery/ck.php?n=aef84788&amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'><img src='http://power.esensetec.com.br:3333/www/delivery/avw.php?zoneid=1&amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;n=aef84788' border='0' alt='' /></a>
-      </Helmet> */}
+      <LargeBanner src={`http://power.esensetec.com.br:3333/www/delivery/avw.php?zoneid=3&amp;cb=98388238232523&amp;n=a8094c9b`} alt="blog" ></LargeBanner>
     </div>
     </>
   )
