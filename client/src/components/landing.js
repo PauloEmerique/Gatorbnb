@@ -232,7 +232,7 @@ export default class Landing extends Component {
   }
 
   blogopen() {
-    window.open("http://ecavesbrasil.com.br", "_ecavesblog")
+    window.open("https://blog.ecavesbrasil.com.br", "_ecavesblog")
   }
 
   render() {
