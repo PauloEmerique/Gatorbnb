@@ -13,6 +13,7 @@ import Home from '../components/home/home'
 import Login from '../components/navbar/login'
 import Post from '../components/navbar/post'
 import Listing from '../components/listing/listing'
+import Area from '../components/listing/area'
 import MyListings from '../components/navbar/mylistings/myListings';
 import Register from '../components/navbar/register'
 import ReviewListings from '../components/navbar/mylistings/reviewListings'
@@ -30,6 +31,7 @@ const Routes = () => (
         <Home key={props.location.search} {...props} />)} 
       />
       <Route exact path="/listing/:handle" component={Listing}/>
+      <Route exact path="/area/:handle" component={Area}/>
       <Route exact path="/post" component={Post}/>
       <Route exact path="/login" component={Login}/>
       <Route exact path="/register" component={Register}/>

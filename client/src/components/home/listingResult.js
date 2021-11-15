@@ -1,7 +1,7 @@
 import React from 'react'
 import { withRouter }  from 'react-router'
 // import { Icon } from 'semantic-ui-react'
-import { Container, Link, Card, Image, Title, Type, Details, Address, Circle, Space, Span, SpanNoImage, Icon, DivLeft, DivInfo, DivData, Description, DataText, DataTitle } from './listingResultStyle'
+import { InfoArea, InfoItem, Container, Link, Card, Image, Title, Type, Details, Address, Circle, Space, Span, SpanNoImage,  DivLeft, DivInfo, DivData, Description, DataText, DataTitle } from './listingResultStyle'
 import styled from 'styled-components'
 
 import Leaflet from '../listing/leaflet'
@@ -20,6 +20,7 @@ import explorerSVG from '../../assets/images/icon-explorer.svg'
 import speleothemSVG from '../../assets/images/icon-speleothem.svg'
 import waterfallSVG from '../../assets/images/icon-waterfall.svg'
 import {Helmet} from "react-helmet";
+import {Info, showInfos} from '../info'
 
 const ImageBanner = styled.img`
   margin: 15px 10px 15px 10px; 
@@ -33,18 +34,18 @@ const LargeBanner = styled.img`
   height: 180;
 `
 const SectionHeader = styled.div`
-  color: #CCCCCC;
+  color: #BBBBBB;
   text-align: center;
   font-size: 26px;
-  margin: 5vh 0 3vh 0;
+  margin: 3vh 0 1vh 0;
 `
 
 const ListingResult = props => {
   return (
     <>
-    <div align='center'>
+    {/* <div align='center'>
       <LargeBanner src={`https://ads.ecavesbrasil.com.br/www/delivery/avw.php?zoneid=4&amp;cb=98388238230000&amp;n=aa158028`} alt="apoiadores" ></LargeBanner>
-    </div>
+    </div> */}
     <SectionHeader>Conheça também...</SectionHeader>
     <div align='center'>
       <ImageBanner src={`https://ads.ecavesbrasil.com.br/www/delivery/avw.php?zoneid=1&amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;n=aef84788`} alt="thumbnail" ></ImageBanner>
@@ -56,20 +57,30 @@ const ListingResult = props => {
     <Container>
       <SectionHeader>Para Visitar</SectionHeader>
       {props.results.map(item => (
-        <Link to={`/listing/${item.id}`} key={item.id} target="_blank">
           <Card>
             <DivLeft>
-              {item.images.length>0 ? <Image src={`${appConfig.apiEndpoint}/grabImg/${item.images[0].id}`} alt="thumbnail" ></Image> : <SpanNoImage>No Images</SpanNoImage> }
+              <Link to={`/listing/${item.id}`} key={item.id}>
+                {item.images.length>0 ? <Image src={`${appConfig.apiEndpoint}/grabImg/${item.images[0].id}`} alt="thumbnail" ></Image> : <SpanNoImage>No Images</SpanNoImage> }
+              </Link>
             </DivLeft>
+
             <DivInfo>
+              <Link to={`/listing/${item.id}`} key={item.id}>
               <Title>{item.name}</Title>
+              </Link>
               <Type>
                 <Space>{item.city}/{item.state}</Space>
                 {/* <Circle/>
                 <Span>{item.caveType}</Span> */}
               </Type>
               <Details>
-                <Description>{item.description}</Description>
+                {/* <Description>{item.description}</Description> */}
+                <InfoArea>
+                  <InfoItem>{showInfos(item,"facilidades", '45px')}</InfoItem>
+                  <InfoItem>{showInfos(item,"atividades", '45px')}</InfoItem>
+                  <InfoItem>{showInfos(item,"acesso", '45px')}</InfoItem>
+                  <InfoItem>{showInfos(item,"equipamento", '45px')}</InfoItem>
+                </InfoArea>
                 <DivData>
                   <DataTitle>Tempo<br/></DataTitle>
                   <DataText>{item.visit_time}</DataText>
@@ -82,31 +93,19 @@ const ListingResult = props => {
                   <DataTitle>Distância<br/></DataTitle>
                   <DataText>{Math.floor(item.distance*100)} km</DataText>
                 </DivData>
-                  {/* <img src={clockSVG} alt="Icon chat" width = "15px" heigth = "15px"/>
-                  <img src={helmetSVG} alt="Icon helmet" width = "15px" heigth = "15px"/>
-                  <img src={lampSVG} alt="Icon lamp" width = "15px" heigth = "15px"/>
-                  <img src={informationSVG} alt="Icon information" width = "15px" heigth = "15px"/>
-                  <img src={burgerSVG} alt="Icon burger" width = "15px" heigth = "15px"/>
-                  <img src={facilitySVG} alt="Icon facility" width = "15px" heigth = "15px"/>
-                  <img src={toiletSVG} alt="Icon toilet" width = "15px" heigth = "15px"/>
-                  <img src={trekkingSVG} alt="Icon trekking" width = "15px" heigth = "15px"/>
-                  <img src={explorerSVG} alt="Icon explorer" width = "15px" heigth = "15px"/>
-                  <img src={speleothemSVG} alt="Icon speleothem" width = "15px" heigth = "15px"/>
-                  <img src={waterfallSVG} alt="Icon waterfall" width = "15px" heigth = "15px"/> */}
               </Details>
-              {/* <Address>{item.address}, {item.visitAdress}</Address> */}
             </DivInfo>
           </Card>
-        </Link>
+        
       ))}
       <div align='center'>
         <Leaflet caves={props.results}/>
       </div>
     </Container>
-    <SectionHeader>Novidades</SectionHeader>
+    {/* <SectionHeader>Novidades</SectionHeader>
     <div align='center'>
       <LargeBanner src={`https://ads.ecavesbrasil.com.br/www/delivery/avw.php?zoneid=3&amp;cb=98388238232523&amp;n=a8094c9b`} alt="blog" ></LargeBanner>
-    </div>
+    </div> */}
     </>
   )
 }

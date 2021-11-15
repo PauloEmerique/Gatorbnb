@@ -14,8 +14,8 @@ export const Link = styled(NavLink)`
 `
 
 export const Card = styled.div`
-  width: 40%;
-  heigth: 120px;
+  width: 90%;
+  heigth: 200px;
   display: inline-block;
   margin: 10px 10px 10px 10px;
   background-color: white;
@@ -23,7 +23,7 @@ export const Card = styled.div`
 `
 
 export const DivLeft = styled.div`
-  width: 30%;
+  width: 60%;
   heigth: 30%
   display: inline-block;
   margin: 10px 5px 10px 15px;
@@ -31,7 +31,7 @@ export const DivLeft = styled.div`
 `
 
 export const DivInfo = styled.div`
-  width: 60%;
+  width: 35%;
   heigth: 30%
   display: inline-block;
   margin: 10px 5px 10px 15px;
@@ -89,6 +89,24 @@ export const Details = styled.p`
   text-align: left;
   padding-left: 15px;
   color: #3f3f3f;
+`
+
+export const InfoItem = styled.span`
+  font-size: 16px;
+  font-weight: bold;
+  ${'' /* display: block; */}
+  margin: 5px 3px 10px 0px;
+`
+
+export const InfoArea = styled.div`
+  font-size: 16px;
+  font-weight: bold;
+  ${'' /* display: block; */}
+  margin: 5px 20px 10px 0px;
+  display: block;
+  text-align: left;
+  align: left;
+  ${'' /* box-shadow: 0px 4px 8px grey;  */}
 `
 
 export const Address = styled.p`

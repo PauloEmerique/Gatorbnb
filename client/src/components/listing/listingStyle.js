@@ -1,13 +1,13 @@
 import styled from 'styled-components'
+import { NavLink } from 'react-router-dom'
 
 export const Column = styled.div`
-  width: 50%;
+  width: 90%;
   position: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 10px;
-  margin-left: 120px;
+  margin: 10px 10px 10px 10px ;
   background-color: white;
 `
 
@@ -27,6 +27,14 @@ export const Container = styled.div`
   background-color: #E5E5EA
 `
 
+export const Link = styled(NavLink)`
+  color: blue;
+  border-bottom: 1px solid grey;
+  :hover {
+    color: brown;
+  }
+`
+
 export const StyledContainer = styled.div`
   width: 50%;
   heigth: 500px;
@@ -34,11 +42,22 @@ export const StyledContainer = styled.div`
 
 export const Title = styled.div`
   text-align: center;
-  border-bottom: 1px solid grey;
-  font-size: 30px;
+  ${'' /* border-bottom: 1px solid grey; */}
+  font-size: 34px;
+  line-height: 1.5;
   padding-top: 10px;
   padding-bottom: 10px;
   margin-right: 10px;
+  margin-bottom: 20px;
+`
+
+export const SubTitle = styled.div`
+  text-align: center;
+  ${'' /* border-bottom: 1px solid grey; */}
+  font-size: 20px;
+  padding-top: 0px;
+  padding-bottom: 10px;
+  ${'' /* margin-right: 10px; */}
 `
 
 export const Image = styled.img`
@@ -58,32 +77,50 @@ export const Images = styled.div`
   // heigth: 250px;
 
 export const Overview = styled.div`
-  font-size: 22px;
-  width: 100%
+  font-size: 20px;
+  font-weight: bold;
+  width: 100%;
   margin: 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid grey;
   margin: 20px 20px 30px 20px;
 `
+export const DetailsCaption = styled.span`
+  font-size: 17px;
+  font-weight: bold;
+  display: block;
+  margin: 15px 10px 5px 20px;
+`
 
 export const Details = styled.span`
-  width: 50%;
-  font-size: 18px;
-  display: block;
+  width: 80%;
+  font-size: 15px;
+  ${'' /* display: block; */}
   margin: 20px 20px 30px 20px;
 `
 
+export const InfoItem = styled.span`
+  font-size: 16px;
+  font-weight: bold;
+  ${'' /* display: block; */}
+  margin: 5px 5px 5px 5px;
+`
+
 export const Description = styled.div`
-  padding-left: 20px;
+  width: 100%;
+  margin: 10 100px 0 100px;
+  font-size: 15px;
 `
 
 export const Para = styled.p`
-  font-size: 18px;
+  font-size: 13px;
 `
 
 export const Map = styled.div`
-  padding-top: px;
-  height: 300px;
+  padding-top: 0px;
+  margin-top: 0px;
+  vertical-align: top;
+  height: 80%;
 `
 
 export const TagsTitle = styled.div`

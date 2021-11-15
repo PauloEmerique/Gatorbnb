@@ -4,8 +4,8 @@ import L from 'leaflet'
 import styled from 'styled-components'
 
 const Leaf = styled(Map)`
-  margin-top: 50px;
-  height: 600px;
+  margin-top: 10px;
+  height: 500px;
   width: 100%;
 `
 
@@ -54,17 +54,19 @@ const Leaflet = (props) => {
   // item.lat, item.lon
   const zoom = 8;
   return (
-    <Leaf center={position} zoom={zoom} scrollWheelZoom={true}>
+    <Leaf center={position} zoom={zoom} scrollWheelZoom={false}> 
       <TileLayer
         attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       {props.caves.map(item => (
+        item.lat?
         <Marker position={[item.lat, item.lon]} icon={myIcon}>
           <Popup>
             {item.name} <br />
           </Popup>
         </Marker>
+        :null
       ))}
     </Leaf>
   )

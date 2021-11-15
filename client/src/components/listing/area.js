@@ -42,7 +42,7 @@ const style = {
 //   },
 // ];
 
-class Listing extends Component {
+class Area extends Component {
 
   state = {
     listing: [],
@@ -100,112 +100,18 @@ class Listing extends Component {
   }
 
   getListing = (handle) => {
-    axios.get(`${appConfig.apiEndpoint}/cave/${handle}`)
+    axios.get(`${appConfig.apiEndpoint}/area/${handle}`)
       .then(res => {
         console.log(res.data.results[0])
         this.setState({
           listing: res.data.results,
           loading: false,
         })
-        // axios.get(`/api/listing/photos/${res.data.listing_id}`)
-        //   .then(res => {
-        //     this.setState({
-        //       loading: false,
-        //       photos: res.data
-        //     })
-        //   })
-        //   .catch(err => {
-        //     console.log(err)
-        //   })
       })
       .catch(err => {
         console.log(err)
       })
   }
-
-  getTags = (handle) => {
-    axios.get(`/api/listing/tagsx/${handle}`)
-      .then(res => {
-        this.setState({
-          tags: res.data
-        })
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }
-
-  handleSlider = () => {
-    this.setState({
-      showSlider: true
-    })
-  }
-
-  showTags = () => {
-    return null
-  }
-
-  // showTags = () => {
-  //   if (this.state.tags.length === 0) {
-  //     return null 
-  //   } else {
-  //     return (
-  //       this.state.tags.map(item => (
-  //         <Tag key={item.tag_name}>{item.tag_name}</Tag>
-  //       ))
-  //     )
-  //   }
-  // }
-
-  handleClose = () => {
-    this.setState({ show: false })
-  }
-
-  handleShow = () => {
-    if (this.state.isAuth === null) {
-      this.props.history.push('/login')
-    }
-    let exist = false 
-    if (this.state.isAuth === 'true') {
-      axios.get('/api/message/myMessages')
-        .then(res => {
-          let temp = res.data
-          temp.forEach(list => {
-            if (list.listing_id === this.state.listing.listing_id) {
-              exist = true
-            }
-          })
-          if (exist === false) {
-            this.setState({ show: true })
-          } else {
-            console.log('chatroom already exists')
-          }
-        })
-    }
-  }
-
-  newMessage = e => {
-    e.preventDefault()
-    axios.post('/api/message/newMessage', {
-      listingId: this.state.listing.listing_id,
-      message: this.state.message
-    })
-      .then(() => {
-        this.props.history.push('/messages')
-      })
-      .catch(err => {
-         console.log(err.response.data)
-      })
-  }
-
-
-
-  // <Details><img src={trekkingSVG} alt="Icon trekking" width = "15px" heigth = "15px"/></Details>
-  // <Details><img src={explorerSVG} alt="Icon explorer" width = "15px" heigth = "15px"/></Details>
-  // <Details><img src={speleothemSVG} alt="Icon speleothem" width = "15px" heigth = "15px"/></Details>
-  // <Details><img src={waterfallSVG} alt="Icon waterfall" width = "15px" heigth = "15px"/></Details>
-
-
 
   render() {
     const { width } = this.state
@@ -328,15 +234,16 @@ class Listing extends Component {
             ) : (
               <>
                 <Title>{this.state.listing[0].name}</Title>
-                <SubTitle>{this.state.listing[0].city} / {this.state.listing[0].state} - <Link to={`/area/${this.state.listing[0].uc.id}`} key={this.state.listing[0].id}>{this.state.listing[0].uc.name}</Link></SubTitle>
+                <SubTitle>({this.state.listing[0].areaType})</SubTitle>
+                <SubTitle>{this.state.listing[0].city} / {this.state.listing[0].state}</SubTitle>
                 {/* <Details></Details> */}
-                <Description>
+                {/* <Description>
                   {this.state.loading ? (
                     null           
                   ) : (
-                    <>{this.state.listing[0].description}</>
+                    <><Link to={`${this.state.listing[0].website}`} key={this.state.listing[0].id}>{this.state.listing[0].website}</Link></>
                   )}
-                </Description>
+                </Description> */}
                 
               </>
             )}
@@ -364,7 +271,6 @@ class Listing extends Component {
               <InfoItem>{showInfos(this.state.listing[0],"facilidades", '45px')}</InfoItem>
               <InfoItem>{showInfos(this.state.listing[0],"atividades", '45px')}</InfoItem>
               <InfoItem>{showInfos(this.state.listing[0],"acesso", '45px')}</InfoItem>
-              <InfoItem>{showInfos(this.state.listing[0],"equipamento", '45px')}</InfoItem>
               </>
             )}
 
@@ -373,20 +279,11 @@ class Listing extends Component {
               null
             ) : (
               <>
-              <DetailsCaption>Dificuldade</DetailsCaption><Details>{this.state.listing[0].difficultyLevel}</Details>
-              <DetailsCaption>Acessibilidade</DetailsCaption><Details>{this.state.listing[0].acessibility}</Details>
-              <DetailsCaption>Tempo de Visitação</DetailsCaption><Details>{this.state.listing[0].visitTime}</Details>
-              <DetailsCaption>Endereço</DetailsCaption><Details>{this.state.listing[0].visitAddress}</Details>
-              <DetailsCaption>Calendário</DetailsCaption><Details>{this.state.listing[0].visitCalendar}</Details>
-              <DetailsCaption>Ingressos</DetailsCaption><Details>{this.state.listing[0].visitTickets}</Details>
-              <DetailsCaption>Grupos</DetailsCaption><Details>{this.state.listing[0].visitGroups}</Details>
-              <DetailsCaption>Centro de Visitantes</DetailsCaption><Details>{this.state.listing[0].visitCenter}</Details>
-              <DetailsCaption>Facilidades</DetailsCaption><Details>{this.state.listing[0].visitFacilities}</Details>
-              <DetailsCaption>Regras</DetailsCaption><Details>{this.state.listing[0].visitRules}</Details>
-              <DetailsCaption>Outras Atividades</DetailsCaption><Details>{this.state.listing[0].visitOtherActivities}</Details>
-              <DetailsCaption>No entorno</DetailsCaption><Details>{this.state.listing[0].visitSurroungindActivities}</Details>
-              <DetailsCaption>Telefone</DetailsCaption><Details>{this.state.listing[0].contactPhone}</Details>
+              <DetailsCaption>Email</DetailsCaption><Details>{this.state.listing[0].email}</Details>
+              <DetailsCaption>Telefone</DetailsCaption><Details>{this.state.listing[0].phone}</Details>
               <DetailsCaption>Site</DetailsCaption><Details>{this.state.listing[0].contactSite}</Details>
+              <DetailsCaption>Saiba mais</DetailsCaption><Details>{this.state.listing[0].knowMore}</Details>
+              <DetailsCaption>Administração</DetailsCaption><Details>{this.state.listing[0].adminEntity}</Details>
               </>
             )}
           
@@ -424,25 +321,12 @@ class Listing extends Component {
               null
             ) : (
               <>
-              <DetailsCaption>Presença de Água</DetailsCaption><Details>{this.state.listing[0].waterPresence}</Details>
-              <DetailsCaption>Rio</DetailsCaption><Details>{this.state.listing[0].river}</Details>
-              <DetailsCaption>Desenvolvimento</DetailsCaption><Details>{this.state.listing[0].development}</Details>
-              <DetailsCaption>Projeção Horizontal</DetailsCaption><Details>{this.state.listing[0].horizontalProjection}</Details>
-              <DetailsCaption>Desnível</DetailsCaption><Details>{this.state.listing[0].desnivel}</Details>
-              <DetailsCaption>Tipo de Rocha</DetailsCaption><Details>{this.state.listing[0].rockType}</Details>
-              <DetailsCaption>Ocorrências de Rochas</DetailsCaption><Details>{this.state.listing[0].rockOcurrence}</Details>
-              <DetailsCaption>Rocha Principal</DetailsCaption><Details>{this.state.listing[0].mainRock}</Details>
+              <DetailsCaption>Bioma</DetailsCaption><Details>{this.state.listing[0].biome}</Details>
+              <DetailsCaption>Clima</DetailsCaption><Details>{this.state.listing[0].climate}</Details>
+              <DetailsCaption>Vegetação</DetailsCaption><Details>{this.state.listing[0].vegetation}</Details>
+              <DetailsCaption>Fauna</DetailsCaption><Details>{this.state.listing[0].fauna}</Details>
+              <DetailsCaption>Flora</DetailsCaption><Details>{this.state.listing[0].flora}</Details>
               </>
-            )}
-
-            <Overview>Elementos Espeleológicos</Overview>
-          {this.state.loading ? (
-              null
-            ) : (
-              this.state.listing[0].speleothems.map(item => (
-                <DetailsCaption>{item.name}</DetailsCaption>
-                )
-              )
             )}
 
         </Column>
@@ -467,4 +351,4 @@ class Listing extends Component {
   }
 }
 
-export default withRouter(Listing)
+export default withRouter(Area)

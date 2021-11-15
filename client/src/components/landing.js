@@ -4,9 +4,10 @@ import { Button, Input } from 'semantic-ui-react'
 import styled from 'styled-components'
 import About from './navbar/about'
 import logo from './navbar/img/logo-ecaves.png'
-import Background from './home/assets/gruta-lago_azul_lago_rafael.jpg'
+import Background from './home/assets/digital-illustration-brian-edward-miller-6.jpg'
 import ListingResult from './home/listingResult'
 import {appConfig} from '../config/app-config'
+import LogoGallery from './logoGallery';
 
 
 const StyledButton = styled(Button)`
@@ -50,6 +51,7 @@ const Container = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  margin-bottom: 30px;
 `
 
 const ListingContainer = styled.div`
@@ -59,14 +61,22 @@ const ListingContainer = styled.div`
   // background-image: url(${Background});
 `
 
+const LogoContainer = styled.div`
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
 const Nav = styled.div`
   padding-top: 6px;
   padding-bottom: 6px;
   margin: 0 auto;
-  max-width: 1000px;
+  max-width: 100%;
   display: flex;
   flex-direction: row;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 `
 
 const LeftColumn = styled.div`
@@ -223,7 +233,7 @@ export default class Landing extends Component {
     if (this.state.isAdmin === null) {
       return (
         <>
-          <LinkDiv style={{margin: '5px'}} onClick={() => {this.blogopen()}}>Blog eCaves</LinkDiv>
+          <LinkDiv style={{margin: '5px'}} onClick={() => {this.blogopen()}}>Blog</LinkDiv>
           <StyledButton onClick={() => {this.props.history.push('/login')}} >Entre</StyledButton>
           {/* <Button style={{margin: '5px'}} onClick={() => {this.props.history.push('/register')}} inverted>Sign Up</Button> */}
         </>
@@ -260,6 +270,9 @@ export default class Landing extends Component {
             </form>
           </Search>
         </Container>
+        <LogoContainer>
+          <LogoGallery/>
+        </LogoContainer>
         <ListingContainer>
             <ListingResult results={this.state.listings}/>
             <Footer>
