@@ -5,8 +5,9 @@ import styled from 'styled-components'
 
 const Leaf = styled(Map)`
   margin-top: 10px;
+  margin-bottom: 20px;
   height: 500px;
-  width: 100%;
+  width: 80%;
 `
 
 // function ParseGeo(input) {
@@ -52,7 +53,7 @@ const Leaflet = (props) => {
   const position = [-25.4321781, -49.2796458];
   // const position = [latd, lond];
   // item.lat, item.lon
-  const zoom = 8;
+  const zoom = 5;
   return (
     <Leaf center={position} zoom={zoom} scrollWheelZoom={false}> 
       <TileLayer

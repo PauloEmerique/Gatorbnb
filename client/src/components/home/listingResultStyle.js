@@ -14,8 +14,8 @@ export const Link = styled(NavLink)`
 `
 
 export const Card = styled.div`
-  width: 90%;
-  heigth: 200px;
+  width: 600px;
+  ${'' /* heigth: 200px; */}
   display: inline-block;
   margin: 10px 10px 10px 10px;
   background-color: white;
@@ -23,46 +23,48 @@ export const Card = styled.div`
 `
 
 export const DivLeft = styled.div`
-  width: 60%;
-  heigth: 30%
+
   display: inline-block;
   margin: 10px 5px 10px 15px;
   float: left;
 `
 
 export const DivInfo = styled.div`
-  width: 35%;
-  heigth: 30%
-  display: inline-block;
+  width: 80%;
+  ${'' /* heigth: 50% */}
+  display: block;
   margin: 10px 5px 10px 15px;
   float: left;
 `
 
 export const DivData = styled.div`
-  width: 30%;
-  heigth: 30%
+  width: 25%;
+  ${'' /* heigth: 30% */}
   display: inline-block;
   margin: 0px 5px 10px 0px;
   float: left;
 `
 
 export const DataTitle = styled.span`
-  font-size: 10px;
+  font-size: 12px;
   font-weight: bold;
 `
 
 export const DataText = styled.span`
-  font-size: 13px;
+  font-size: 15px;
 `
 
 export const Image = styled.img`
-  width: 100%;
-  height: 150px;
+  ${'' /* width: 100%; */}
+  ${'' /* height: 150px; */}
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   border: 2px solid #dfdfdf;
+  object-fit: contain;
+  width: 500px;
+  height: 350px;
 `
 
 export const Title = styled.div`

@@ -1,6 +1,7 @@
 import React from 'react'
 import ImageGallery from 'react-image-gallery';
-import {appConfig} from '../config/app-config'
+import styled from 'styled-components'
+// import {appConfig} from '../config/app-config'
 
 import geep_logo from '../assets/images/geep-logo.png'
 import ecossistema_logo from '../assets/images/ecossistema-logo.png'
@@ -9,43 +10,40 @@ import sebrae_logo from '../assets/images/sebrae-logo.png'
 import livinglab_logo from '../assets/images/livinglab-logo.png'
 
 // const PREFIX_URL = 'https://raw.githubusercontent.com/xiaolin/react-image-gallery/master/static/';
-const PREFIX_URL = '/static/media/';
+// const PREFIX_URL = '/static/media/';
 
+export const LogoItem = styled.div`
+  width: 300px;
+  ${'' /* position: fixed; */}
+  float: left;
+`
 
+export const LogoLabel = styled.div`
+  ${'' /* width: 300px; */}
+  ${'' /* position: fixed; */}
+  ${'' /* float: left; */}
+  display: block;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: bold;
+`
 
 const images = [
   {
-    original: ecossistema_logo, 
-    thumbnail: ecossistema_logo,
-    originalHeight: '170px',
-    description:'Realização',
-    originalTitle:'Realização',
-  },
-  {
     original: livinglab_logo, 
-    thumbnail: livinglab_logo,
     originalHeight: '170px',
-    description:'Apoio',
-    originalTitle:'Apoio',
   },
   {
     original: sebrae_logo, 
-    thumbnail: sebrae_logo,
     originalHeight: '170px',
-    description:'Apoio',
-    originalTitle:'Apoio',
   },
   {
     original: sbe_logo, 
-    thumbnail: sbe_logo,
     originalHeight: '170px',
-    description:'Apoio',
   },
   {
     original: geep_logo, 
-    thumbnail: geep_logo,
     originalHeight: '170px',
-    description:'Apoio',
   },
 ];
 
@@ -53,7 +51,10 @@ const images = [
 
 class LogoGallery extends React.Component {
   render() {
-    return <ImageGallery items={images} showNav={false} showPlayButton={false} showFullscreenButton={false} showThumbnails={false} showTitle={true} autoPlay={true}/>;
+    return <>
+              <LogoItem><LogoLabel>Realização</LogoLabel><img width="200px" src={ecossistema_logo} alt="ecossistema"/></LogoItem>
+              <LogoItem><LogoLabel>Apoio</LogoLabel><ImageGallery items={images} showNav={false} showPlayButton={false} showFullscreenButton={false} showThumbnails={false} showTitle={true} autoPlay={true}/></LogoItem>
+          </>
   }
 }
 

@@ -63,10 +63,10 @@ const ListingContainer = styled.div`
 
 const LogoContainer = styled.div`
   width: 100%;
-  height: 200px;
+  height: 220px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  ${'' /* align-items: center; */}
 `
 
 const Nav = styled.div`
@@ -146,6 +146,32 @@ const Para = styled.p`
 const Image = styled.img`
   margin-left: 15px;
 `
+
+const ImageBanner = styled.img`
+  margin: 15px 10px 15px 10px; 
+  width: 300;
+  height: 250;
+`
+
+const LargeBanner = styled.img`
+  margin: 10px 10px 20px 10px; 
+  width: 728;
+  height: 180;
+`
+const SectionHeader = styled.div`
+  color: #BBBBBB;
+  text-align: center;
+  font-size: 26px;
+  margin: 3vh 0 1vh 0;
+`
+
+
+function cacheBlocker(){
+  const min = 100000;
+  const max = 10000000;
+  const rand = min + Math.random() * (max - min);
+  return rand.toString()
+}
 
 export default class Landing extends Component {
 
@@ -274,6 +300,15 @@ export default class Landing extends Component {
           <LogoGallery/>
         </LogoContainer>
         <ListingContainer>
+            <SectionHeader>Conheça Também</SectionHeader>
+            <div align='center'>
+              <a href={`http://www.iyck2021.org`} target='_blank'>
+                <ImageBanner src={`https://ads.ecavesbrasil.com.br/www/delivery/avw.php?zoneid=1&amp;cb=${cacheBlocker()}&amp;n=a30e9a4e`} alt="thumbnail" ></ImageBanner>
+              </a>
+              <a href='https://brasil.un.org/pt-br/sdgs' target='_blank'>
+                <ImageBanner src={`https://ads.ecavesbrasil.com.br/www/delivery/avw.php?zoneid=2&amp;cb=${cacheBlocker()}&amp;n=a0ea7b26`} alt="thumbnail" ></ImageBanner>
+              </a>
+            </div>
             <ListingResult results={this.state.listings}/>
             <Footer>
               <Para>© 2021 eCaves Inc.·Privacidade·Termos·Mapa do site·Informações da empresa</Para>

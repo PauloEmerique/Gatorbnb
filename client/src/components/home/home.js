@@ -7,6 +7,7 @@ import Search from './search'
 import styled from 'styled-components'
 import axios from 'axios'
 import ReactGA from 'react-ga'
+import {appConfig} from '../../config/app-config'
 
 const queryString = require('query-string')
 
@@ -45,12 +46,12 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    ReactGA.initialize('UA-140468325-1', {
-    'cookieDomain': 'auto',
-    'debug': true
-    });
-    // ReactGA.initialize('UA-140468325-1');
-    ReactGA.pageview(window.location.pathname + window.location.search)
+    // ReactGA.initialize('UA-140468325-1', {
+    // 'cookieDomain': 'auto',
+    // 'debug': true
+    // });
+    // // ReactGA.initialize('UA-140468325-1');
+    // ReactGA.pageview(window.location.pathname + window.location.search)
     const query = this.props.location.search
     const parsed = queryString.parse(query);
 
@@ -64,7 +65,8 @@ class Home extends Component {
     })
 
     if (query === '?queue=' || query === '?queue=all') {
-      this.getAllListings()
+      // this.getAllListings()
+      this.getListings(query)
     } else {
       this.getListings(query)
     }
@@ -84,7 +86,7 @@ class Home extends Component {
   }
 
   getListings = (value) => {
-    axios.get(`http://power.esensetec.com.br:9999/ecaves/api/search/${value}`)
+    axios.get(`${appConfig.apiEndpoint}/search/${value}`)
       .then(res => {
         if (res.data.length === 0) {
           this.setState({ noResults: true})
@@ -276,11 +278,11 @@ class Home extends Component {
     } else {
       return (
         <>
-          {/* <NavBar queue={this.state.queue} changeQueue={this.changeQueue} /> */}
-          {/* <Filter {...props} /> */}
-          {/* <Container>
+          <NavBar queue={this.state.queue} changeQueue={this.changeQueue} />
+          <Filter {...props} />
+          <Container>
             <ListingResult results={this.state.listings}/>
-          </Container> */}
+          </Container>
         </>
       )
     }
