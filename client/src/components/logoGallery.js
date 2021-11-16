@@ -13,7 +13,7 @@ import livinglab_logo from '../assets/images/livinglab-logo.png'
 // const PREFIX_URL = '/static/media/';
 
 export const LogoItem = styled.div`
-  width: 300px;
+  width: 250px;
   ${'' /* position: fixed; */}
   float: left;
 `
@@ -31,19 +31,19 @@ export const LogoLabel = styled.div`
 const images = [
   {
     original: livinglab_logo, 
-    originalHeight: '170px',
+    originalHeight: '150px',
   },
   {
     original: sebrae_logo, 
-    originalHeight: '170px',
+    originalHeight: '150px',
   },
   {
     original: sbe_logo, 
-    originalHeight: '170px',
+    originalHeight: '150px',
   },
   {
     original: geep_logo, 
-    originalHeight: '170px',
+    originalHeight: '150px',
   },
 ];
 
@@ -52,7 +52,7 @@ const images = [
 class LogoGallery extends React.Component {
   render() {
     return <>
-              <LogoItem><LogoLabel>Realização</LogoLabel><img width="200px" src={ecossistema_logo} alt="ecossistema"/></LogoItem>
+              <LogoItem><LogoLabel>Realização</LogoLabel><img width="180px" src={ecossistema_logo} alt="ecossistema"/></LogoItem>
               <LogoItem><LogoLabel>Apoio</LogoLabel><ImageGallery items={images} showNav={false} showPlayButton={false} showFullscreenButton={false} showThumbnails={false} showTitle={true} autoPlay={true}/></LogoItem>
           </>
   }
