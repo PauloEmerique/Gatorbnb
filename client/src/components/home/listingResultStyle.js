@@ -14,7 +14,7 @@ export const Link = styled(NavLink)`
 `
 
 export const Card = styled.div`
-  width: 600px;
+  width: 400px;
   ${'' /* heigth: 200px; */}
   display: inline-block;
   margin: 10px 10px 10px 10px;
@@ -63,8 +63,8 @@ export const Image = styled.img`
   border-bottom-right-radius: 10px;
   border: 2px solid #dfdfdf;
   object-fit: contain;
-  width: 500px;
-  height: 350px;
+  width: 350px;
+  height: 300px;
 `
 
 export const Title = styled.div`

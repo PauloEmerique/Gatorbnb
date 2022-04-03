@@ -47,7 +47,8 @@ const Container = styled.div`
   // background-color: #330033;
   width: 100%;
   height: 80vh;
-  background-image: url(${Background});
+  //background-image: url(${Background});
+  background-image: url('https://api.ecavesbrasil.com.br/api/grabPicture/65601188-b954-4cf7-8fd0-5701eb0a99ad?index=2');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -163,6 +164,18 @@ const SectionHeader = styled.div`
   text-align: center;
   font-size: 26px;
   margin: 3vh 0 1vh 0;
+`
+
+export const Text = styled.div`
+  ${'' /* width: 300px; */}
+  ${'' /* position: fixed; */}
+  ${'' /* float: left; */}
+  display: block;
+  margin-bottom: 40px;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 1.4;
 `
 
 
@@ -296,7 +309,9 @@ export default class Landing extends Component {
             </form>
           </Search>
         </Container>
+        <Text>eCaves apresenta o universo das cavernas turísticas brasileiras</Text>
         <LogoContainer>
+          
           <LogoGallery/>
         </LogoContainer>
         <ListingContainer>

@@ -24,26 +24,26 @@ export const LogoLabel = styled.div`
   ${'' /* float: left; */}
   display: block;
   margin-bottom: 10px;
-  font-size: 14px;
+  font-size: 20px;
   font-weight: bold;
 `
 
 const images = [
   {
     original: livinglab_logo, 
-    originalHeight: '150px',
+    originalHeight: '130px',
   },
   {
     original: sebrae_logo, 
-    originalHeight: '150px',
+    originalHeight: '130px',
   },
   {
     original: sbe_logo, 
-    originalHeight: '150px',
+    originalHeight: '130px',
   },
   {
     original: geep_logo, 
-    originalHeight: '150px',
+    originalHeight: '130px',
   },
 ];
 
@@ -52,7 +52,8 @@ const images = [
 class LogoGallery extends React.Component {
   render() {
     return <>
-              <LogoItem><LogoLabel>Realização</LogoLabel><img width="180px" src={ecossistema_logo} alt="ecossistema"/></LogoItem>
+              
+              <LogoItem><LogoLabel>Realização</LogoLabel><img width="160px" src={ecossistema_logo} alt="ecossistema"/></LogoItem>
               <LogoItem><LogoLabel>Apoio</LogoLabel><ImageGallery items={images} showNav={false} showPlayButton={false} showFullscreenButton={false} showThumbnails={false} showTitle={true} autoPlay={true}/></LogoItem>
           </>
   }

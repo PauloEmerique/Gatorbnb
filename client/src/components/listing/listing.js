@@ -27,6 +27,11 @@ const style = {
   position: 'static'
 }
 
+const placeholder = {
+  position: 'static',
+  width: '90%'
+}
+
 // const images = [
 //   {
 //     original: 'https://picsum.photos/id/1018/1000/600/',
@@ -304,7 +309,7 @@ class Listing extends Component {
 
       <NavBar />
       {this.state.loading ? (
-              <Placeholder style={style}>
+              <Placeholder style={placeholder}>
                 <Placeholder.Header style={style}>
                   <Placeholder.Line style={style}/>
                   <Placeholder.Line style={style}/>
