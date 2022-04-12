@@ -95,6 +95,15 @@ export const DetailsCaption = styled.span`
 export const Details = styled.span`
   width: 80%;
   font-size: 15px;
+  line-height: 1.5;
+  ${'' /* display: block; */}
+  margin: 20px 20px 30px 20px;
+`
+
+export const DetailsArea = styled.span`
+  width: 80%;
+  font-size: 15px;
+  line-height: 1.5;
   ${'' /* display: block; */}
   margin: 20px 20px 30px 20px;
 `

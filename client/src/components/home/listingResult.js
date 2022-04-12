@@ -77,7 +77,7 @@ const ListingResult = props => {
                   </DivData>
                   <DivData>
                     <DataTitle>Distância<br/></DataTitle>
-                    <DataText>{Math.floor(item.distance*100)} km</DataText>
+                    <DataText>{Math.floor(item.distance/1000)} km</DataText>
                   </DivData>
                 </InfoArea>
               </Details>

@@ -93,27 +93,29 @@ const icons = [
 // src={`${appConfig.apiEndpoint}/grabImg/${this.state.listing[0].images.length>0?this.state.listing[0].images[0].id:null}`}
 
 export function Info(props) {
-  const picked = icons.find(o => o.id === props.info.name);
-  return (!picked)?null:<InfoItem>
-          <img src={picked.image} alt="contemplacao" width = {props.width} heigth = {props.height} data-tip data-for={props.info.name}/>
-          <ReactTooltip id={props.info.name} place="bottom" type="info" effect="solid">{props.info.description}</ReactTooltip>
-        </InfoItem>
+  // const picked = icons.find(o => o.id === props.info.name);
+  // const iconsrc = "http://localhost:8080/api/grabIcon?id="+props.info.filename;
+  const iconsrc = `${appConfig.apiEndpoint}/grabIcon?id=${props.info.filename}`
+  return <InfoItem>
+           <img src={iconsrc} alt={props.info.name} width = {props.width} heigth = {props.height} data-tip data-for={props.info.name}/>
+           <ReactTooltip id={props.info.name} place="bottom" type="info" effect="solid">{props.info.description}</ReactTooltip>
+         </InfoItem>
 }
 
 
 export function showInfos(cave, category, size) {
-  console.log(`at showinfos ${category}`)
-  console.log(cave.name);
+  // console.log(`at showinfos ${category}`)
+  // console.log(cave.name);
   if (cave.infos==null) return null;
   const infos=cave.infos.filter(function(item){ return item["category"]===category;});
   if (infos.length===0) {
-    console.log("showinfos null")
+    // console.log("showinfos null")
     return null 
   } else {
-    console.log("showinfos items")
+    // console.log("showinfos items")
     return (
       infos.map(item => (
-                <Info info={item} width={size} height={size}/>
+                <Info id={item.id} info={item} width={size} height={size}/>
                 )
       )
     )

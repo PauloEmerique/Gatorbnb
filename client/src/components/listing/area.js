@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { Icon, Placeholder } from 'semantic-ui-react'
 import { Modal, Button, Form } from 'react-bootstrap'
 import { withRouter }  from 'react-router'
-import { Link, InfoItem, SubTitle, DetailsCaption, Column, RightColumn, Container, StyledContainer, Title, Image, Images, Overview, Details, Description, Para, Map, TagsTitle, Tag, TagContainer, Footer } from './listingStyle'
+import { Link, InfoItem, SubTitle, DetailsCaption, Column, RightColumn, Container, StyledContainer, Title, Image, Images, Overview, Details, DetailsArea, Description, Para, Map, TagsTitle, Tag, TagContainer, Footer } from './listingStyle'
 import { MobileLeftColumn, MobileRightColumn, MobileContainer, MobileStyledContainer, MobileTitle, MobileImage, MobileOverview, MobileDetails, MobilePara } from './listingMobileStyle'
 
 import NavBar from '../navbar/navBar'
@@ -282,8 +282,12 @@ class Area extends Component {
               <DetailsCaption>Email</DetailsCaption><Details>{this.state.listing[0].email}</Details>
               <DetailsCaption>Telefone</DetailsCaption><Details>{this.state.listing[0].phone}</Details>
               <DetailsCaption>Site</DetailsCaption><Details>{this.state.listing[0].contactSite}</Details>
-              <DetailsCaption>Saiba mais</DetailsCaption><Details>{this.state.listing[0].knowMore}</Details>
               <DetailsCaption>Administração</DetailsCaption><Details>{this.state.listing[0].adminEntity}</Details>
+              <DetailsCaption>Saiba mais</DetailsCaption>
+              {/* <div>
+                      { <div dangerouslySetInnerHTML={{ __html: this.state.listing[0].knowMore}} /> }
+              </div> */}
+              <DetailsArea>{ <div  dangerouslySetInnerHTML={{ __html: this.state.listing[0].knowMore}} /> }</DetailsArea>
               </>
             )}
           

@@ -339,7 +339,9 @@ class Listing extends Component {
                   {this.state.loading ? (
                     null           
                   ) : (
-                    <>{this.state.listing[0].description}</>
+                    <div>
+                      { <div dangerouslySetInnerHTML={{ __html: this.state.listing[0].description}} /> }
+                    </div>
                   )}
                 </Description>
                 
@@ -383,7 +385,9 @@ class Listing extends Component {
               <DetailsCaption>Tempo de Visitação</DetailsCaption><Details>{this.state.listing[0].visitTime}</Details>
               <DetailsCaption>Endereço</DetailsCaption><Details>{this.state.listing[0].visitAddress}</Details>
               <DetailsCaption>Calendário</DetailsCaption><Details>{this.state.listing[0].visitCalendar}</Details>
-              <DetailsCaption>Ingressos</DetailsCaption><Details>{this.state.listing[0].visitTickets}</Details>
+              <DetailsCaption>Ingressos</DetailsCaption>
+              {/* <Details>{this.state.listing[0].visitTickets}</Details> */}
+              { <Details dangerouslySetInnerHTML={{ __html: this.state.listing[0].visitTickets.replaceAll('\n','<br/>')}} /> }
               <DetailsCaption>Grupos</DetailsCaption><Details>{this.state.listing[0].visitGroups}</Details>
               <DetailsCaption>Centro de Visitantes</DetailsCaption><Details>{this.state.listing[0].visitCenter}</Details>
               <DetailsCaption>Facilidades</DetailsCaption><Details>{this.state.listing[0].visitFacilities}</Details>
@@ -391,7 +395,7 @@ class Listing extends Component {
               <DetailsCaption>Outras Atividades</DetailsCaption><Details>{this.state.listing[0].visitOtherActivities}</Details>
               <DetailsCaption>No entorno</DetailsCaption><Details>{this.state.listing[0].visitSurroungindActivities}</Details>
               <DetailsCaption>Telefone</DetailsCaption><Details>{this.state.listing[0].contactPhone}</Details>
-              <DetailsCaption>Site</DetailsCaption><Details>{this.state.listing[0].contactSite}</Details>
+              <DetailsCaption>Site</DetailsCaption><Details dangerouslySetInnerHTML={{ __html: this.state.listing[0].contactSite}}/>
               </>
             )}
           
@@ -448,6 +452,15 @@ class Listing extends Component {
                 <DetailsCaption>{item.name}</DetailsCaption>
                 )
               )
+            )}
+
+           
+          {this.state.loading ? (
+              null
+            ) : (
+              <div>
+                 { this.state.listing[0].embedCode? (<div><Overview>Visita 3D</Overview> <div dangerouslySetInnerHTML={{ __html: this.state.listing[0].embedCode}} /></div>):null }
+              </div>
             )}
 
         </Column>

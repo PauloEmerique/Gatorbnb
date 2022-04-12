@@ -214,8 +214,20 @@ export default class Landing extends Component {
     //   priceMax: parsed.priceMax,
     //   distanceMax: parsed.distanceMax,
     // })
+    var lat;
+    var lon;
+    console.log("before  geolocation")
+    navigator.geolocation.getCurrentPosition( (position) => {
+      console.log("entered geolocation")
+      lat=position.coords.latitude;
+      console.log("Latitude is :", position.coords.latitude);
 
-    this.getListings()
+      lon=position.coords.longitude;
+      console.log("Longitude is :", position.coords.longitude);
+      console.log("will get listings");
+      this.getListings(lat,lon);
+    });
+    this.getListings(lat,lon);
   }
 
 
@@ -233,8 +245,8 @@ export default class Landing extends Component {
     this.props.history.push('/login')
   }
 
-  getListings = () => {
-    axios.get(`${appConfig.apiEndpoint}/home/`)
+  getListings = (lat,lon) => {
+    axios.get(`${appConfig.apiEndpoint}/home?lat=${lat}&lon=${lon}`)
       .then(res => {
         if (res.data.length === 0) {
           this.setState({ noResults: true})
