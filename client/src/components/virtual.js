@@ -16,7 +16,7 @@ const StyledButton = styled(Button)`
     background-color: #2761ab;
     color: white;
     box-shadow: 0px 3px 5px grey;
-    margin: 5px;
+    margin: px;
     padding: 6px 14px 6px 14px;
     cursor: pointer;
     :hover {
@@ -36,14 +36,13 @@ const LinkDiv = styled.span`
     font-weight: bold;
     ${'' /* box-shadow: 0px 3px 5px grey; */}
     margin: px;
-    padding: 6px 20px 6px 14px;
+    padding: 6px 40px 6px 14px;
     :hover {
       ${'' /* background-color: #378bf7; */}
       color: #2761ab;  
     }
   }
 `
-
 const LinkDivW = styled.span`
   && {
     ${'' /* background-color: white; */}
@@ -60,28 +59,32 @@ const LinkDivW = styled.span`
     }
   }
 `
+const VirtualDiv = styled.div`
+  height: 600px;
+  width: 800px;
+  background-color: #DDEEFF;
+  padding: 15px;
+`
+
+const VirtualName = styled.h1`
+  color: black;
+  font-size: 24px;
+  padding-left: 5px
+  ${'' /* text-shadow: 0px 3px 3px grey; */}
+`
 
 // style={{margin: '2px', height:'25px', padding:'1px 10px 1px 10px'}}
 const Container = styled.div`
   // background-color: #330033;
   width: 100%;
-  // height: 80vh;
+  ${'' /* height: 20vh; */}
   //background-image: url(${Background});
+  ${'' /* background-image: url('https://api.ecavesbrasil.com.br/api/grabPicture/65601188-b954-4cf7-8fd0-5701eb0a99ad?index=2'); */}
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   margin-bottom: 30px;
-`
-const SplashContainer = styled.div`
-  // background-color: #330033;
-  width: 100%;
-  height: 80vh;
-  //background-image: url(${Background});
-  background-image: url('https://api.ecavesbrasil.com.br/api/grabPicture/65601188-b954-4cf7-8fd0-5701eb0a99ad?index=2');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  margin-bottom: 30px;
+  
 `
 
 const ListingContainer = styled.div`
@@ -89,6 +92,7 @@ const ListingContainer = styled.div`
   width: 100%;
   height: 80vh;
   // background-image: url(${Background});
+  margin-left: 100px;
 `
 
 const LogoContainer = styled.div`
@@ -116,14 +120,14 @@ const LeftColumn = styled.div`
 const MiddleColumn = styled.div`
   text-align: center;
   font-size: 16px;
-  width: 500px;
+  width: 700px;
   @media (max-width: 500px) {
     display: none;
   }
 `
 
 const RightColumn = styled.div`
-  width: 600px;
+  width: 400px;
 `
 
 const Wrapper = styled.div`
@@ -131,12 +135,18 @@ const Wrapper = styled.div`
   margin-right: 10px;
 `
 
-const Title = styled.h1`
-  color: white;
-  font-size: 40px;
-  padding-left: 5px
-  text-shadow: 0px 2px 2px grey;
+const Title = styled.div`
+  font-size: 25px;
+  font-weight: bold;
+  padding-bottom: 15px;
+  text-align: center;
 `
+const MainText = styled.div`
+  font-size: 16px;
+  padding-bottom: 15px;
+  text-align: center;
+`
+
 
 const Header = styled.h1`
   color: white;
@@ -215,7 +225,7 @@ function cacheBlocker(){
   return rand.toString()
 }
 
-export default class Landing extends Component {
+export default class Virtual extends Component {
 
   state = {
     user_id: localStorage.getItem('user_id'),
@@ -226,37 +236,25 @@ export default class Landing extends Component {
   }
 
   componentDidMount() {
-    // ReactGA.initialize('UA-140468325-1', {
-    // 'cookieDomain': 'auto',
-    // 'debug': true
-    // });
-    // ReactGA.initialize('UA-140468325-1');
-    // ReactGA.pageview(window.location.pathname + window.location.search)
-    // const query = this.props.location.search
-    // const parsed = queryString.parse(query);
+    this.getListings();
+  }
 
-    // this.setState({
-    //   queue: parsed.queue,
-    //   type: parsed.type,
-    //   beds: parsed.beds,
-    //   baths: parsed.baths,
-    //   priceMax: parsed.priceMax,
-    //   distanceMax: parsed.distanceMax,
-    // })
-    var lat;
-    var lon;
-    console.log("before  geolocation")
-    navigator.geolocation.getCurrentPosition( (position) => {
-      console.log("entered geolocation")
-      lat=position.coords.latitude;
-      console.log("Latitude is :", position.coords.latitude);
-
-      lon=position.coords.longitude;
-      console.log("Longitude is :", position.coords.longitude);
-      console.log("will get listings");
-      this.getListings(lat,lon);
-    });
-    this.getListings(lat,lon);
+  getListings = (lat,lon) => {
+    axios.get(`${appConfig.apiEndpoint}/virtual`)
+      .then(res => {
+        if (res.data.length === 0) {
+          this.setState({ noResults: true})
+        }
+        else {
+          let listingsTemp = res.data
+          this.setState({
+              listings: listingsTemp
+          })
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
 
@@ -272,24 +270,6 @@ export default class Landing extends Component {
     localStorage.removeItem('isAuth')
     localStorage.removeItem('isAdmin')
     this.props.history.push('/login')
-  }
-
-  getListings = (lat,lon) => {
-    axios.get(`${appConfig.apiEndpoint}/home?lat=${lat}&lon=${lon}`)
-      .then(res => {
-        if (res.data.length === 0) {
-          this.setState({ noResults: true})
-        }
-        else {
-          let listingsTemp = res.data
-          this.setState({
-              listings: listingsTemp
-          })
-        }
-      })
-      .catch(err => {
-        console.log(err)
-      })
   }
 
 
@@ -313,20 +293,9 @@ export default class Landing extends Component {
     if (this.state.isAdmin === null) {
       return (
         <>
-          <a href={`/virtual`}>
-            <LinkDiv style={{margin: '5px'}}>Experiências Virtuais</LinkDiv>
-          </a>
-          <a href={`/blog`}>
-            <LinkDiv style={{margin: '5px'}}>Blog</LinkDiv>
-          </a>
-          <a href={`/contact`}>
-            <LinkDiv style={{margin: '5px'}}>Contato</LinkDiv>
-          </a>
-          <a href={`/about`}>
-            <LinkDiv style={{margin: '5px'}}>Sobre</LinkDiv>
-          </a>
+          <LinkDiv style={{margin: '5px'}} onClick={() => {this.props.history.push('/virtual')}}>Experiências Virtuais</LinkDiv>
+          <LinkDiv style={{margin: '5px'}} onClick={() => {this.blogopen()}}>Blog</LinkDiv>
           <StyledButton onClick={() => {this.props.history.push('/login')}} >Entre</StyledButton>
-          <StyledButton onClick={() => {this.props.history.push('/register')}} >Cadastre-se</StyledButton>
           {/* <Button style={{margin: '5px'}} onClick={() => {this.props.history.push('/register')}} inverted>Sign Up</Button> */}
         </>
       )
@@ -340,54 +309,28 @@ export default class Landing extends Component {
   render() {
     return (
       <>
+        <NavBar2/>
         <Container>
-          {/* <Nav>
-            <LeftColumn>
-              <Image src={logo} height="30" alt="logo" />
-            </LeftColumn>
-            <MiddleColumn>
-
-            </MiddleColumn>
-            <RightColumn>
-              <Wrapper>
-                {this.getNav()}
-              </Wrapper>
-            </RightColumn>
-          </Nav> */}
-          <NavBar2/>
-          {/* <Header></Header> */}
-          {/* <Description>Go ahead and discover the Caves world</Description> */}
-          {/* <Search>
-            <form onSubmit={this.handleSearch}>
-              <Input size='small' action={{ icon: 'search' }} name="search" placeholder='Caverna, Parque ou Cidade' style={{width: '100%'}} />
-            </form>
-          </Search> */}
+        <br/><br/>
+        <Title>Experiências Virtuais</Title>
+          <MainText>Faça uma visita em 360 graus às cavernas...</MainText>          
         </Container>
-        <SplashContainer/>
-        <Text>eCaves apresenta o universo das cavernas turísticas brasileiras</Text>
-        <LogoContainer>
-          
-          <LogoGallery/>
-        </LogoContainer>
         <ListingContainer>
-            <SectionHeader>Conheça Também</SectionHeader>
-            <div align='center'>
-              <a href={`http://www.iyck2021.org`} target='_blank'>
-                <ImageBanner src={`https://ads.ecavesbrasil.com.br/www/delivery/avw.php?zoneid=1&amp;cb=${cacheBlocker()}&amp;n=a30e9a4e`} alt="thumbnail" ></ImageBanner>
-              </a>
-              <a href='https://brasil.un.org/pt-br/sdgs' target='_blank'>
-                <ImageBanner src={`https://ads.ecavesbrasil.com.br/www/delivery/avw.php?zoneid=2&amp;cb=${cacheBlocker()}&amp;n=a0ea7b26`} alt="thumbnail" ></ImageBanner>
-              </a>
-            </div>
-            <ListingResult results={this.state.listings}/>
+            {/* <SectionHeader>Experiências Virtuais</SectionHeader> */}
+            {this.state.listings.map(item => (
+              <>
+              <VirtualName>{item.name} por {item.embed_author}</VirtualName>
+              <VirtualDiv id={item.id}>{<div  dangerouslySetInnerHTML={{ __html: item.embed_code}} /> }</VirtualDiv>
+              </>
+            ))}
             <Footer>
-              <a href={`https://blog.ecavesbrasil.com.br`} target='_blank'>
+              <a href={`http://www.iyck2021.org`} target='_blank'>
                 <LinkDivW>Blog</LinkDivW>
               </a>
-              <a href={`/contact`}>
+              <a href={`http://www.iyck2021.org`} target='_blank'>
                 <LinkDivW>Contato</LinkDivW>
               </a>
-              <a href={`/about`}>
+              <a href={`http://www.iyck2021.org`} target='_blank'>
                 <LinkDivW>Sobre</LinkDivW>
               </a>
             </Footer>

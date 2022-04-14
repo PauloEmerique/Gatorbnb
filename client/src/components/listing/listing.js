@@ -7,6 +7,7 @@ import { Link, InfoItem, SubTitle, DetailsCaption, Column, RightColumn, Containe
 import { MobileLeftColumn, MobileRightColumn, MobileContainer, MobileStyledContainer, MobileTitle, MobileImage, MobileOverview, MobileDetails, MobilePara } from './listingMobileStyle'
 
 import NavBar from '../navbar/navBar'
+import NavBar2 from '../navbar/navBar2'
 import Leaflet from './leaflet'
 import Slider from './slider'
 import {appConfig} from '../../config/app-config'
@@ -307,7 +308,7 @@ class Listing extends Component {
       {/* <div className="App" ref={el => (this.div = el)}>
       </div> */}
 
-      <NavBar />
+      <NavBar2 />
       {this.state.loading ? (
               <Placeholder style={placeholder}>
                 <Placeholder.Header style={style}>

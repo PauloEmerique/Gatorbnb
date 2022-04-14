@@ -1,5 +1,5 @@
 {
-  "apiEndpoint": "https://ecavesapi.ngrok.io/api",
+  "apiEndpoint": "http://localhost:8080/api",
   "loggingEnabled": true,
   "loggingLevel": "Debug"
 }

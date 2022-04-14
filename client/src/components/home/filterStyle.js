@@ -1,11 +1,11 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  position: fixed;
-  top: 60px;
+  /* position: fixed; */
+  top: 20px;
   width: 100%;
   background-color: rgba(240,240,240,1.0);
-  height: 140px; 
+  height: 100px; 
   
 `
 

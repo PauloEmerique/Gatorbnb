@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Alert } from 'react-bootstrap'
 import ListingResult from './listingResult'
-import NavBar from '../navbar/navBar'
+import NavBar2 from '../navbar/navBar2'
 import Filter from './filter'
 import Search from './search'
 import styled from 'styled-components'
@@ -29,6 +29,13 @@ const alertStyle = {
   margin: '10px',
   position: 'static'
 }
+
+const Title = styled.div`
+  font-size: 25px;
+  font-weight: bold;
+  padding-bottom: 15px;
+  text-align: center;
+`
 
 class Home extends Component {
 
@@ -236,7 +243,7 @@ class Home extends Component {
       if (this.state.noResults === true) {
         return (
           <>
-            <NavBar queue={this.state.queue} changeQueue={this.changeQueue} />
+            <NavBar2 queue={this.state.queue} changeQueue={this.changeQueue} />
             <Search handleFilter={this.toggleFilter} />
             {this.showFilter()}
             <ContainerMobile>
@@ -250,7 +257,7 @@ class Home extends Component {
       } else {
         return (
           <>
-            <NavBar queue={this.state.queue} changeQueue={this.changeQueue} />
+            <NavBar2 queue={this.state.queue} changeQueue={this.changeQueue} />
             <Search handleFilter={this.toggleFilter} />
             {this.showFilter()}
             <ContainerMobile>
@@ -265,8 +272,9 @@ class Home extends Component {
     if (this.state.noResults === true) {
       return (
         <>
-          <NavBar queue={this.state.queue} changeQueue={this.changeQueue} />
-          <Filter {...props}/>
+          <NavBar2 queue={this.state.queue} changeQueue={this.changeQueue} />
+          {/* <Filter {...props}/> */}
+          
           <Results>
             <Alert style={alertStyle} variant="warning">
               <Alert.Heading>No matching results...</Alert.Heading>
@@ -278,8 +286,10 @@ class Home extends Component {
     } else {
       return (
         <>
-          <NavBar queue={this.state.queue} changeQueue={this.changeQueue} />
-          <Filter {...props} />
+          <NavBar2 queue={this.state.queue} changeQueue={this.changeQueue} />
+          {/* <Filter {...props} /> */}
+          <br/><br/>
+          <Title>Resultados da busca</Title>
           <Container>
             <ListingResult results={this.state.listings}/>
           </Container>

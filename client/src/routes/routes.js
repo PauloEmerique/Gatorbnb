@@ -1,13 +1,16 @@
 import React from 'react'
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom'
 
-import Peter from '../components/about/peter'
-import Mehi from '../components/about/mehi'
-import Jay from '../components/about/jay'
-import Anthonyabout from '../components/about/anthonyAbout'
-import Wesley from '../components/about/wesley'
-import FrankyDong from '../components/about/frankydong'
-import Tanya from '../components/about/tanya'
+
+import About from '../components/about'
+
+// import Peter from '../components/about/peter'
+// import Mehi from '../components/about/mehi'
+// import Jay from '../components/about/jay'
+// import Anthonyabout from '../components/about/anthonyAbout'
+// import Wesley from '../components/about/wesley'
+// import FrankyDong from '../components/about/frankydong'
+// import Tanya from '../components/about/tanya'
 
 import Home from '../components/home/home' 
 import Login from '../components/navbar/login'
@@ -18,10 +21,12 @@ import MyListings from '../components/navbar/mylistings/myListings';
 import Register from '../components/navbar/register'
 import ReviewListings from '../components/navbar/mylistings/reviewListings'
 import Landing from '../components/landing';
+import Virtual from '../components/virtual';
 import Messages from '../components/messaging/messages'
 import Users from '../components/navbar/mylistings/users';
 import Listings from '../components/navbar/mylistings/listings';
 import ErrorComponent from '../components/errorComponent';
+import Contact from '../components/contact';
 
 const Routes = () => (
   <Router>
@@ -42,13 +47,17 @@ const Routes = () => (
       <Route exact path="/listings" component={Listings}/>
       <Route exact path="/messages" component={Messages}/>
 
-      <Route exact path="/about/peter" component={Peter} />
+      <Route exact path="/about" component={About}/>
+      <Route exact path="/contact" component={Contact}/>
+      <Route exact path="/virtual" component={Virtual}/>
+
+      {/* <Route exact path="/about/peter" component={Peter} />
       <Route exact path="/about/jay" component={Jay} />
       <Route exact path="/about/anthony" component={Anthonyabout} />
       <Route exact path="/about/wesley" component={Wesley} />
       <Route exact path="/about/mehi" component={Mehi} />      
       <Route exact path="/about/franky" component={FrankyDong} />        
-      <Route exact path="/about/tanya" component={Tanya} />
+      <Route exact path="/about/tanya" component={Tanya} /> */}
 
       <Route exact path="/404" component={ErrorComponent} />
       <Route component={ErrorComponent} />

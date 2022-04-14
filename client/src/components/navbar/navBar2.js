@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { Dropdown } from 'react-bootstrap'
-import { Input } from 'semantic-ui-react'
-import { Container, Image, Title, List, Link, Nav, ImageMobile, StyledDropdown, LeftColumn, MiddleColumn, RightColumn, LeftMobile, MiddleMobile, RightMobile, StyledButton } from './navBarStyle'
+import { Button, Input } from 'semantic-ui-react'
+import styled from 'styled-components'
+import { Container, Image, Title, List, Link, LinkDiv, Nav, ImageMobile, StyledDropdown, LeftColumn, MiddleColumn, RightColumn, LeftMobile, MiddleMobile, RightMobile } from './navBarStyle'
 import logo from './img/logo-ecaves.png'
 
 const inputStyle = {
-  width: '400px',
+  width: '500px',
   paddingTop: '9px',
   paddingBottom: '8px',
   paddingLeft: '100px'
@@ -18,8 +19,23 @@ const mobileStyle = {
   paddingBottom: '8px'
 }
 
+const StyledButton = styled(Button)`
+  && {
+    background-color: #2761ab;
+    color: white;
+    box-shadow: 0px 3px 5px grey;
+    margin: 5px;
+    padding: 6px 14px 6px 14px;
+    cursor: pointer;
+    :hover {
+      background-color: #378bf7;
+      color: white;
+      cursor: pointer;
+    }
+  }
+`
 
-class NavBar extends Component {
+class NavBar2 extends Component {
 
   state = {
     width: window.innerWidth,
@@ -78,9 +94,21 @@ class NavBar extends Component {
     if (this.state.isAdmin === null) {
       return (
         <>
-          {/* <Link><Nav to="/post">Post</Nav></Link> */}
-          <Link><Nav to="/login">Login</Nav></Link>
-          <Link><Nav to="/register">Sign Up</Nav></Link>
+          <a href={`/virtual`}>
+            <LinkDiv style={{margin: '5px'}}>Experiências Virtuais</LinkDiv>
+          </a>
+          <a href={`/blog`}>
+            <LinkDiv style={{margin: '5px'}}>Blog</LinkDiv>
+          </a>
+          <a href={`/contact`}>
+            <LinkDiv style={{margin: '5px'}}>Contato</LinkDiv>
+          </a>
+          <a href={`/about`}>
+            <LinkDiv style={{margin: '5px'}}>Sobre</LinkDiv>
+          </a>
+          <StyledButton onClick={() => {this.props.history.push('/login')}} >Entre</StyledButton>
+          <StyledButton onClick={() => {this.props.history.push('/register')}} >Cadastre-se</StyledButton>
+          {/* <Button style={{margin: '5px'}} onClick={() => {this.props.history.push('/register')}} inverted>Sign Up</Button> */}
         </>
       )
     }
@@ -114,11 +142,21 @@ class NavBar extends Component {
     if (this.state.isAdmin === null) {
       return (
         <>
-          <StyledDropdown title="Menu" variant="warning" drop="left">
-            <Dropdown.Item onClick={() => {this.props.history.push('/login')}}>Login</Dropdown.Item>
-            <Dropdown.Item onClick={() => {this.props.history.push('/register')}}>Sign Up</Dropdown.Item>
-            <Dropdown.Item onClick={() => {this.props.history.push('/post')}}>Post</Dropdown.Item>
-          </StyledDropdown>
+          <a href={`/virtual`}>
+            <LinkDiv style={{margin: '5px'}}>Experiências Virtuais</LinkDiv>
+          </a>
+          <a href={`/blog`}>
+            <LinkDiv style={{margin: '5px'}}>Blog</LinkDiv>
+          </a>
+          <a href={`/contact`}>
+            <LinkDiv style={{margin: '5px'}}>Contato</LinkDiv>
+          </a>
+          <a href={`/about`}>
+            <LinkDiv style={{margin: '5px'}}>Sobre</LinkDiv>
+          </a>
+          <StyledButton onClick={() => {this.props.history.push('/login')}} >Entre</StyledButton>
+          <StyledButton onClick={() => {this.props.history.push('/register')}} >Cadastre-se</StyledButton>
+          {/* <Button style={{margin: '5px'}} onClick={() => {this.props.history.push('/register')}} inverted>Sign Up</Button> */}
         </>
       )
     }
@@ -145,7 +183,7 @@ class NavBar extends Component {
                 placeholder='Cidade, Caverna ou Parque' 
                 value={this.props.queue}
                 onChange={this.props.changeQueue}
-                maxLength="40"
+                maxLength="60"
               />
             </form>
           </MiddleMobile>
@@ -160,7 +198,7 @@ class NavBar extends Component {
       return (
         <Container>
           <LeftColumn>
-            <Nav to="/"><Image src={logo} height="30" alt="logo"/></Nav>
+            <Nav to="/"><Image src={logo} height="40" alt="logo"/></Nav>
             {/* <Nav to="/"><Title>eCaves</Title></Nav> */}
           </LeftColumn>
           <MiddleColumn>
@@ -173,7 +211,7 @@ class NavBar extends Component {
                 placeholder='Cidade, Caverna ou Parque' 
                 value={this.props.queue}
                 onChange={this.props.changeQueue}
-                maxLength="40"
+                maxLength="60"
               />
             </form>
           </MiddleColumn>
@@ -188,4 +226,4 @@ class NavBar extends Component {
   }
 }
 
-export default withRouter(NavBar);
+export default withRouter(NavBar2);

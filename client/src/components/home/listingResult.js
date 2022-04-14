@@ -40,12 +40,13 @@ const ListingResult = props => {
   return (
     <>
     <Container>
-      <SectionHeader>Para Visitar</SectionHeader>
+      {/* <SectionHeader>Para Visitar</SectionHeader> */}
       {props.results.map(item => (
           <Card>
             <DivLeft>
               <Link to={`/listing/${item.id}`} key={item.id}>
                 {item.images.length>0 ? <Image src={`${appConfig.apiEndpoint}/grabPicture/${item.images[0].id}?index=2`} alt="thumbnail" ></Image> : <SpanNoImage>No Images</SpanNoImage> }
+                <span>{item.images[0]?item.images[0].credits:''}</span>
               </Link>
             </DivLeft>
 

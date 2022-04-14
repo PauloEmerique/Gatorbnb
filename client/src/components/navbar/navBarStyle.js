@@ -3,19 +3,19 @@ import { NavLink } from 'react-router-dom'
 import { DropdownButton } from 'react-bootstrap'
 
 export const Container = styled.div`
-  position: sticky;
+  /*position: sticky;*/
   top: 0;
   height: 60px;
   width: 100%;
   background-color: #33003300;
   box-shadow: 0px 3px 5px grey;
-  z-index: 1000;
+  /*z-index: 1000; */
   display: flex;
   flex-direction: row;
 `
 
 export const LeftColumn = styled.div`
-  min-width: 240px;
+  min-width: 200px;
 `
 
 export const MiddleColumn = styled.div`
@@ -23,7 +23,7 @@ export const MiddleColumn = styled.div`
 `
 
 export const RightColumn = styled.div`
-  min-width: 600px;
+  min-width: 700px;
 `
 
 export const Image = styled.img`
@@ -53,7 +53,39 @@ export const Link = styled.li`
   font-size: 16px;
   padding-left: 50px;
 `
+export const LinkDiv = styled.span`
+  && {
+    ${'' /* background-color: white; */}
+    ${'' /* border-color: white; */}
+    color: #222222;
+    font-size: 15px;
+    font-weight: bold;
+    ${'' /* box-shadow: 0px 3px 5px grey; */}
+    margin: px;
+    padding: 6px 10px 6px 10px;
+    :hover {
+      ${'' /* background-color: #378bf7; */}
+      color: #2761ab;  
+    }
+  }
+`
 
+export const LinkDivW = styled.span`
+  && {
+    ${'' /* background-color: white; */}
+    ${'' /* border-color: white; */}
+    color: #FFFFFF;
+    font-size: 15px;
+    font-weight: bold;
+    ${'' /* box-shadow: 0px 3px 5px grey; */}
+    margin: px;
+    padding: 6px 40px 6px 14px;
+    :hover {
+      ${'' /* background-color: #378bf7; */}
+      color: #000000;  
+    }
+  }
+`
 export const Nav = styled(NavLink)`
   color: #ffcc33;
   :hover {
