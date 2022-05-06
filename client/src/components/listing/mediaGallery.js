@@ -20,6 +20,18 @@ const images = [
 // src={`${appConfig.apiEndpoint}/grabImg/${this.state.listing[0].images.length>0?this.state.listing[0].images[0].id:null}`}
 
 class MediaGallery extends React.Component {
+
+  state = {
+    showThumbnails: this.props.showThumbnails?this.props.showThumbnails:true,
+    showNav: this.props.showNav?this.props.showNav:true,
+  }
+
+  componentDidMount() {
+      this.setState({
+        showThumbnails: this.props.showThumbnails
+    })
+  }
+
   render() {
     let i2=[]
     this.props.images.map(item =>(
@@ -37,7 +49,7 @@ class MediaGallery extends React.Component {
       )
       
     ))
-    return <ImageGallery items={i2} showNav={true} showPlayButton={true} showFullscreenButton={true} showThumbnails={true} autoPlay={true}/>;
+    return <ImageGallery items={i2} showNav={this.state.showNav} showPlayButton={true} showFullscreenButton={true} showThumbnails={this.state.showThumbnails} autoPlay={true}/>;
   }
 }
 

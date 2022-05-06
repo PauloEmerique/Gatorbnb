@@ -8,6 +8,7 @@ import styled from 'styled-components'
 import axios from 'axios'
 import ReactGA from 'react-ga'
 import {appConfig} from '../../config/app-config'
+import Footer from '../footer'
 
 const queryString = require('query-string')
 
@@ -62,6 +63,21 @@ class Home extends Component {
     const query = this.props.location.search
     const parsed = queryString.parse(query);
 
+    var lat=null;
+    var lon=null;
+    console.log("before  geolocation")
+    navigator.geolocation.getCurrentPosition( (position) => {
+      console.log("entered geolocation")
+      lat=position.coords.latitude;
+      console.log("Latitude is :", position.coords.latitude);
+
+      lon=position.coords.longitude;
+      console.log("Longitude is :", position.coords.longitude);
+      console.log("will get listings");
+      this.getListings(query,lat,lon);
+    });
+    this.getListings(query, lat,lon);
+
     this.setState({
       queue: parsed.queue,
       type: parsed.type,
@@ -71,12 +87,12 @@ class Home extends Component {
       distanceMax: parsed.distanceMax,
     })
 
-    if (query === '?queue=' || query === '?queue=all') {
-      // this.getAllListings()
-      this.getListings(query)
-    } else {
-      this.getListings(query)
-    }
+    // if (query === '?queue=' || query === '?queue=all') {
+    //   // this.getAllListings()
+    //   this.getListings(query,lat,lon)
+    // } else {
+    //   this.getListings(query,lat,lon)
+    // }
 
   }
 
@@ -92,8 +108,8 @@ class Home extends Component {
     this.setState({ width: window.innerWidth })
   }
 
-  getListings = (value) => {
-    axios.get(`${appConfig.apiEndpoint}/search/${value}`)
+  getListings = (value, lat, lon) => {
+    axios.get(`${appConfig.apiEndpoint}/search/${value}&lat=${lat}&lon=${lon}`)
       .then(res => {
         if (res.data.length === 0) {
           this.setState({ noResults: true})
@@ -277,8 +293,8 @@ class Home extends Component {
           
           <Results>
             <Alert style={alertStyle} variant="warning">
-              <Alert.Heading>No matching results...</Alert.Heading>
-              <p>Please check your spelling or enter a valid city or ZIP code.</p>
+              <Alert.Heading>Nenhum resultado para sua busca...</Alert.Heading>
+              <p>Verifique o termo digitado, pode ser a sigla de um Estado, ou o nome parcial de uma Cidade, Caverna ou Parque</p>
             </Alert>
           </Results>
         </>
@@ -293,6 +309,7 @@ class Home extends Component {
           <Container>
             <ListingResult results={this.state.listings}/>
           </Container>
+          <Footer/>
         </>
       )
     }

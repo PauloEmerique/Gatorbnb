@@ -27,13 +27,13 @@ export const RightColumn = styled.div`
 `
 
 export const Image = styled.img`
-  position: fixed;
+  ${'' /* position: fixed; */}
   margin-top: 7px;
   margin-left: 25px;
 `
 
 export const Title = styled.div`
-  position: fixed;
+  ${'' /* position: fixed; */}
   margin-left: 85px;
   padding-top: 20px;
   color: #ffcc33;
@@ -103,6 +103,8 @@ export const StyledDropdown = styled(DropdownButton)`
   float:right;
   margin-right: 15px;
   margin-top: 13px;
+  background-color: #ffcc33;
+  border-color: #ffcc33;
 `
 
 export const LeftMobile = styled.div`
@@ -116,11 +118,13 @@ export const MiddleMobile = styled.div`
 
 export const RightMobile = styled.div`
   min-width: 100px;
+  align:right;
 `
 
 export const StyledButton = styled.button`
   border: none;
-  background-color: #330033;
+  background-color: #ffcc33;
+  border-color: #ffcc33;
   color: #ffcc33;
   :hover {
     text-decoration: underline;

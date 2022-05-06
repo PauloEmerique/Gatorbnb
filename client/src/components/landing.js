@@ -1,15 +1,25 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { Button, Input } from 'semantic-ui-react'
+import { Button, Input, Placeholder } from 'semantic-ui-react'
 import styled from 'styled-components'
 import About from './navbar/about'
 import logo from './navbar/img/logo-ecaves.png'
 import Background from './home/assets/digital-illustration-brian-edward-miller-6.jpg'
 import ListingResult from './home/listingResult'
 import {appConfig} from '../config/app-config'
-import LogoGallery from './logoGallery';
+import LogoGallery from './logoGallery'
 import NavBar2 from './navbar/navBar2'
+import Footer from './footer'
+import MediaGallery from './listing/mediaGallery';
 
+const style = {
+  position: 'static'
+}
+
+const placeholder = {
+  position: 'static',
+  width: '90%'
+}
 
 const StyledButton = styled(Button)`
   && {
@@ -75,13 +85,25 @@ const Container = styled.div`
 const SplashContainer = styled.div`
   // background-color: #330033;
   width: 100%;
-  height: 80vh;
+  height: 70vh;
   //background-image: url(${Background});
   background-image: url('https://api.ecavesbrasil.com.br/api/grabPicture/65601188-b954-4cf7-8fd0-5701eb0a99ad?index=2');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   margin-bottom: 30px;
+`
+
+const SplashContainer2 = styled.div`
+  // background-color: #330033;
+  width: 100%;
+  ${'' /* height: 90vh; */}
+  //background-image: url(${Background});
+  ${'' /* background-image: url('https://api.ecavesbrasil.com.br/api/grabPicture/65601188-b954-4cf7-8fd0-5701eb0a99ad?index=2'); */}
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-bottom: 20px;
 `
 
 const ListingContainer = styled.div`
@@ -157,11 +179,11 @@ const Search = styled.div`
   padding: 15px;
 `
 
-const Footer = styled.div`
-  padding: 20px;
-  background-color: #2761ab;
-  color: white;
-`
+// const Footer = styled.div`
+//   padding: 20px;
+//   background-color: #2761ab;
+//   color: white;
+// `
 
 const Disclaimer = styled.h1`
   text-align: center;
@@ -222,7 +244,10 @@ export default class Landing extends Component {
     isAuth: localStorage.getItem('isAuth'),
     isAdmin: localStorage.getItem('isAdmin'),
     listings: [],
+    splashs: [],
     noResults: false,
+    loadingSplash: true,
+    loading: true,
   }
 
   componentDidMount() {
@@ -243,6 +268,7 @@ export default class Landing extends Component {
     //   priceMax: parsed.priceMax,
     //   distanceMax: parsed.distanceMax,
     // })
+    this.getSplash();
     var lat;
     var lon;
     console.log("before  geolocation")
@@ -274,6 +300,25 @@ export default class Landing extends Component {
     this.props.history.push('/login')
   }
 
+  getSplash = () => {
+    axios.get(`${appConfig.apiEndpoint}/splash`)
+      .then(res => {
+        if (res.data.length === 0) {
+          // this.setState({ noSplash: true})
+        }
+        else {
+          let splashTemp = res.data.results
+          this.setState({
+              splashs: splashTemp,
+              loadingSplash: false
+          })
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
   getListings = (lat,lon) => {
     axios.get(`${appConfig.apiEndpoint}/home?lat=${lat}&lon=${lon}`)
       .then(res => {
@@ -283,7 +328,8 @@ export default class Landing extends Component {
         else {
           let listingsTemp = res.data
           this.setState({
-              listings: listingsTemp
+              listings: listingsTemp,
+              loading: false
           })
         }
       })
@@ -362,10 +408,24 @@ export default class Landing extends Component {
               <Input size='small' action={{ icon: 'search' }} name="search" placeholder='Caverna, Parque ou Cidade' style={{width: '100%'}} />
             </form>
           </Search> */}
-        </Container>
-        <SplashContainer/>
-        <Text>eCaves apresenta o universo das cavernas turísticas brasileiras</Text>
-        <LogoContainer>
+       
+        {/* <SplashContainer/> */}
+        <SplashContainer2>
+        {this.state.loadingSplash ? (
+              <Placeholder style={placeholder}>
+                <Placeholder.Header style={style}>
+                  <Placeholder.Line style={style}/>
+                  <Placeholder.Line style={style}/>
+                </Placeholder.Header>
+              </Placeholder>
+            ) : (
+              <>
+              <MediaGallery images={this.state.splashs} showThumbnails={false}/>;
+              </>
+            )}
+        </SplashContainer2>
+        <Text style={{margin: '5px'}}>eCaves apresenta o universo das cavernas turísticas brasileiras</Text>
+        <LogoContainer style={{margin: '15px 5 5 5'}}>
           
           <LogoGallery/>
         </LogoContainer>
@@ -379,20 +439,11 @@ export default class Landing extends Component {
                 <ImageBanner src={`https://ads.ecavesbrasil.com.br/www/delivery/avw.php?zoneid=2&amp;cb=${cacheBlocker()}&amp;n=a0ea7b26`} alt="thumbnail" ></ImageBanner>
               </a>
             </div>
+            <SectionHeader>Para Visitar</SectionHeader>
             <ListingResult results={this.state.listings}/>
-            <Footer>
-              <a href={`https://blog.ecavesbrasil.com.br`} target='_blank'>
-                <LinkDivW>Blog</LinkDivW>
-              </a>
-              <a href={`/contact`}>
-                <LinkDivW>Contato</LinkDivW>
-              </a>
-              <a href={`/about`}>
-                <LinkDivW>Sobre</LinkDivW>
-              </a>
-            </Footer>
+            <Footer/>
         </ListingContainer>
-        
+        </Container>
         {/* <About /> */}
       </>
     )

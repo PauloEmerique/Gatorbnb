@@ -90,7 +90,7 @@ class NavBar extends Component {
     if (this.state.isAdmin === 'false') {
       return (
         <>
-          <StyledDropdown title="Menu" variant="warning" drop="left">
+          <StyledDropdown title="Menu" variant="primary" drop="left">
             <Dropdown.Item onClick={() => {this.props.history.push('/post')}}>Post</Dropdown.Item>
             <Dropdown.Item onClick={() => {this.props.history.push('/mylistings')}}>My Listings</Dropdown.Item>
             <Dropdown.Item onClick={() => {this.props.history.push('/messages')}}>Messages</Dropdown.Item>
@@ -102,7 +102,7 @@ class NavBar extends Component {
     if (this.state.isAdmin === 'true') {
       return (
         <>
-          <StyledDropdown title="Menu" variant="warning" drop="left">
+          <StyledDropdown title="Menu" variant="primary" drop="left">
             <Dropdown.Item onClick={() => {this.props.history.push('/users')}}>Users</Dropdown.Item>
             <Dropdown.Item onClick={() => {this.props.history.push('/listings')}}>Listings</Dropdown.Item>
             <Dropdown.Item onClick={() => {this.props.history.push('/reviewlistings')}}>Pending Listings</Dropdown.Item>
@@ -114,7 +114,7 @@ class NavBar extends Component {
     if (this.state.isAdmin === null) {
       return (
         <>
-          <StyledDropdown title="Menu" variant="warning" drop="left">
+          <StyledDropdown title="Menu" variant="primary" drop="left">
             <Dropdown.Item onClick={() => {this.props.history.push('/login')}}>Login</Dropdown.Item>
             <Dropdown.Item onClick={() => {this.props.history.push('/register')}}>Sign Up</Dropdown.Item>
             <Dropdown.Item onClick={() => {this.props.history.push('/post')}}>Post</Dropdown.Item>

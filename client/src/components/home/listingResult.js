@@ -45,7 +45,7 @@ const ListingResult = props => {
           <Card>
             <DivLeft>
               <Link to={`/listing/${item.id}`} key={item.id}>
-                {item.images.length>0 ? <Image src={`${appConfig.apiEndpoint}/grabPicture/${item.images[0].id}?index=2`} alt="thumbnail" ></Image> : <SpanNoImage>No Images</SpanNoImage> }
+                {item.images.length>0 ? <Image src={`${appConfig.apiEndpoint}/grabPicture/${item.images[0].id}?index=1`} alt="thumbnail" ></Image> : <SpanNoImage>No Images</SpanNoImage> }
                 <span>{item.images[0]?item.images[0].credits:''}</span>
               </Link>
             </DivLeft>
@@ -62,10 +62,7 @@ const ListingResult = props => {
               <Details>
                 {/* <Description>{item.description}</Description> */}
                 <InfoArea>
-                  <InfoItem>{showInfos(item,"facilidades", '45px')}</InfoItem>
-                  <InfoItem>{showInfos(item,"atividades", '45px')}</InfoItem>
-                  <InfoItem>{showInfos(item,"acesso", '45px')}</InfoItem>
-                  <InfoItem>{showInfos(item,"equipamento", '45px')}</InfoItem>
+                  <InfoItem>{showInfos(item,"*", '40px', true)}</InfoItem>
                 </InfoArea>
                 <InfoArea>
                   <DivData>

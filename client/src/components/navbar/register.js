@@ -3,7 +3,9 @@ import { Redirect } from 'react-router-dom'
 import { Button, Form, Label, Loader, Checkbox } from 'semantic-ui-react'
 import styled from 'styled-components'
 import NavBar from './navBar'
+import NavBar2 from './navBar2'
 import axios from 'axios'
+import Footer from '../footer'
 
 const Container = styled.div`
   max-width: 600px;
@@ -11,11 +13,20 @@ const Container = styled.div`
   padding-right: 10px;
   margin: auto;
   margin-top: 5%;
+  margin-bottom: 5%;
 `
 
 const Title = styled.div`
   font-size: 25px;
   font-weight: bold;
+  padding-bottom: 15px;
+  text-align: center;
+`
+
+const Warn = styled.div`
+  font-size: 20px;
+  font-weight: bold;
+  color: red;
   padding-bottom: 15px;
   text-align: center;
 `
@@ -153,10 +164,11 @@ class Register extends Component {
 
     return (
       <>
-      <NavBar />
+      <NavBar2 />
       <Container>
         <Form onSubmit={this.handleRegister}>
-          <Title>Create an account</Title>
+          <Title>Crie sua Conta</Title>
+          <Warn>em breve ...</Warn>
           <Wrapper>
             <Form.Field>
               <label>E-mail</label>
@@ -164,66 +176,71 @@ class Register extends Component {
                 <Label basic color='red' pointing='below'>{formErrors.emailError}</Label>
               )}
               <Form.Input 
+                disabled
                 maxLength="30"
                 fluid icon='user' 
                 iconPosition='left' 
-                placeholder='E-mail address' 
+                placeholder='E-mail' 
                 onChange={(e) => {this.setState({email: e.target.value})}}
               />
             </Form.Field>
             <Form.Field>
-              <label>First Name</label>
+              <label>Nome</label>
               {formErrors.fnameError.length > 0 && (
                 <Label basic color='red' pointing='below'>{formErrors.fnameError}</Label>
               )}
               <Form.Input 
+                disabled
                 maxLength="30"
                 fluid icon='user' 
                 iconPosition='left' 
-                placeholder='First Name' 
+                placeholder='Nome' 
                 onChange={(e) => {this.setState({firstname: e.target.value})}}
               />
             </Form.Field>
             <Form.Field>
-              <label>Last Name</label>
+              <label>Sobrenome</label>
               {formErrors.lnameError.length > 0 && (
                 <Label basic color='red' pointing='below'>{formErrors.lnameError}</Label>
               )}
               <Form.Input 
+                disabled
                 maxLength="30"
                 fluid icon='user' 
                 iconPosition='left' 
-                placeholder='Last Name' 
+                placeholder='Sobrenome' 
                 onChange={(e) => {this.setState({lastname: e.target.value})}}
               />
             </Form.Field>
             <Form.Field>
-              <label>Password</label>
+              <label>Senha</label>
               {formErrors.passwordError.length > 0 && (
                 <Label basic color='red' pointing='below'>{formErrors.passwordError}</Label>
               )}
               <Form.Input 
+                disabled
                 maxLength="30"
                 fluid icon='lock' 
                 iconPosition='left' 
-                placeholder='Password' 
+                placeholder='Senha' 
                 type='password' 
                 onChange={(e) => {this.setState({password: e.target.value})}}
               />
-              <Checkbox label='I agree to the TERMS AND CONDITIONS' onChange={() => {this.setState({ check: !this.state.check })}}/>
+              <Checkbox disabled label='Eu concordo com os TERMOS E CONDIÇÕES' onChange={() => {this.setState({ check: !this.state.check })}}/>
               {formErrors.checkError.length > 0 && (
                 <Label basic color='red' pointing='left'>{formErrors.checkError}</Label>
               )}
             </Form.Field>
           </Wrapper>
           {this.state.isLoading === false ? (
-            <StyledButton fluid size='large'type="submit">Log In</StyledButton>
+            <StyledButton disabled fluid size='large' type="submit">Criar Conta</StyledButton>
           ) : (
             <Loader style={{ marginTop: '10px'}} active inline='centered' />
           )}
           <Error>{this.state.formErrors.invalidError}</Error>
         </Form>
       </Container>
+      <Footer/>
       </>
     )
     }

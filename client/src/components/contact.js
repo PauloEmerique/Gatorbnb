@@ -2,13 +2,18 @@ import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import { Button, Form, Label, Loader, Checkbox } from 'semantic-ui-react'
 import styled from 'styled-components'
+import NavBar from './navbar/navBar'
 import NavBar2 from './navbar/navBar2'
 import axios from 'axios'
+import Footer from './footer'
+import {appConfig} from '../config/app-config'
+import url from 'url'
+
+// const url = require('url');
 
 const Container = styled.div`
   max-width: 600px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding: 10px 10px 100px 10px;
   margin: auto;
   margin-top: 5%;
 `
@@ -49,7 +54,7 @@ const Error = styled.span`
   color: red;
 `
 
-class Register extends Component {
+class Contact extends Component {
 
   state = {
     user_id: localStorage.getItem('user_id'),
@@ -57,15 +62,15 @@ class Register extends Component {
     isAdmin: localStorage.getItem('isAdmin'),
     isLoading: false,
     email: '',
-    firstname: '',
-    lastname: '',
-    password: '',
-    check: false,
+    name: '',
+    subject: '',
+    message: '',
+    check: true,
     formErrors: {
-      fnameError: '',
-      lnameError: '',
+      nameError: '',
+      messageError: '',
+      subjectError: '',
       emailError: '',
-      passwordError: '',
       invalidError: '',
       checkError:'',
     }
@@ -73,73 +78,66 @@ class Register extends Component {
 
   validate = () => {
     let isError = false
-    const { email, firstname, lastname, password, check, formErrors } = this.state
+    const { email, name, message, check, formErrors } = this.state
 
     if (email.indexOf("@") === -1) {
-      this.setState(Object.assign(formErrors, {emailError: 'Email must be valid'} ))
+      this.setState(Object.assign(formErrors, {emailError: 'Informe um email válido'} ))
       isError = true
     } else {
       this.setState(Object.assign(formErrors, {emailError: ''} ))
     }
 
-    if (firstname.length === 0) {
-      this.setState(Object.assign(formErrors, {fnameError: 'First name is required'} ))
+    if (name.length === 0) {
+      this.setState(Object.assign(formErrors, {nameError: 'Digite seu nome'} ))
       isError = true
     } else {
-      this.setState(Object.assign(formErrors, {fnameError: ''} ))
+      this.setState(Object.assign(formErrors, {nameError: ''} ))
     }
-
-    if (lastname.length === 0) {
-      this.setState(Object.assign(formErrors, {lnameError: 'Last name is required'} ))
+    
+    if (message.length === 0) {
+      this.setState(Object.assign(formErrors, {messageError: 'Digite sua mensagem'} ))
       isError = true
     } else {
-      this.setState(Object.assign(formErrors, {lnameError: ''} ))
-    }
-
-    if (password.length < 6) {
-      this.setState(Object.assign(formErrors, {passwordError: 'Password must be 6 characters or more'} ))
-      isError = true
-    } else {
-      this.setState(Object.assign(formErrors, {passwordError: ''} ))
-    }
-
-    if (check === false) {
-      this.setState(Object.assign(formErrors, {checkError: 'Checkbox required'} ))
-      isError = true
-    } else {
-      this.setState(Object.assign(formErrors, {checkError: ''} ))
+      this.setState(Object.assign(formErrors, {messageError: ''} ))
     }
 
     return isError
   }
 
+
+
   handleRegister = e => {
     e.preventDefault()
     const err = this.validate()
+    let payload = {
+      email: this.state.email,
+      name: this.state.name,
+      message: this.state.message,
+      subject: this.state.subject
+    }
+    const params = new URLSearchParams(payload);
     if (!err && this.state.check === true) {
       this.setState({ isLoading: true })
-      axios.post('/api/user/register', {
-        email: this.state.email,
-        firstname: this.state.firstname,
-        lastname: this.state.lastname,
-        password: this.state.password,
-      })
+      axios.get(`${appConfig.apiEndpoint}/sendmessage?${params}`)
         .then(res => {
-          localStorage.setItem('user_id', res.data.user_id)
-          localStorage.setItem('isAuth', 'true')
-          localStorage.setItem('isAdmin', 'false')
-          this.props.history.push('/')
+          // localStorage.setItem('user_id', res.data.user_id)
+          // localStorage.setItem('isAuth', 'true')
+          // localStorage.setItem('isAdmin', 'false')
+          // this.props.history.push('/')
+          alert('Mensagem Enviada!')
         })
         .catch(err => {
-          if (err.response.data === 'email already used') {
-            this.setState({ isLoading: false })
-            this.setState(Object.assign(this.state.formErrors, {invalidError: 'Email already used'} ))
-          }
+          this.setState({ isLoading: false })
+          // if (err.response.data === 'email already used') {
+          //   this.setState({ isLoading: false })
+          //   this.setState(Object.assign(this.state.formErrors, {invalidError: 'Email already used'} ))
+          // }
 
-          if (err.response.data === 'invalid email') {
-            this.setState({ isLoading: false })
-            this.setState(Object.assign(this.state.formErrors, {invalidError: 'Invalid email'} ))
-          }
+          // if (err.response.data === 'invalid email') {
+          //   this.setState({ isLoading: false })
+          //   this.setState(Object.assign(this.state.formErrors, {invalidError: 'Invalid email'} ))
+          // }
+          alert('Ops! Alguma falha ao tentar enviar sua mensagem!')
           console.log(err.response.data)
         })
     } else {
@@ -161,15 +159,15 @@ class Register extends Component {
           <Wrapper>
           <Form.Field>
               <label>Nome</label>
-              {formErrors.fnameError.length > 0 && (
-                <Label basic color='red' pointing='below'>{formErrors.fnameError}</Label>
+              {formErrors.nameError.length > 0 && (
+                <Label basic color='red' pointing='below'>{formErrors.nameError}</Label>
               )}
               <Form.Input 
                 maxLength="30"
                 fluid icon='user' 
                 iconPosition='left' 
                 placeholder='Nome' 
-                onChange={(e) => {this.setState({firstname: e.target.value})}}
+                onChange={(e) => {this.setState({name: e.target.value})}}
               />
             </Form.Field>
             
@@ -188,15 +186,29 @@ class Register extends Component {
             </Form.Field>
 
             <Form.Field>
+              <label>Assunto</label>
+              {formErrors.subjectError.length > 0 && (
+                <Label basic color='red' pointing='below'>{formErrors.subjectError}</Label>
+              )}
+              <Form.Input 
+                maxLength="30"
+                fluid icon='user' 
+                iconPosition='left' 
+                placeholder='Assunto' 
+                onChange={(e) => {this.setState({subject: e.target.value})}}
+              />
+            </Form.Field>
+
+            <Form.Field>
               <label>Mensagem</label>
-              {formErrors.lnameError.length > 0 && (
-                <Label basic color='red' pointing='below'>{formErrors.lnameError}</Label>
+              {formErrors.messageError.length > 0 && (
+                <Label basic color='red' pointing='below'>{formErrors.messageError}</Label>
               )}
               <Form.TextArea 
                 fluid icon='user' 
                 iconPosition='left' 
                 placeholder='Mensagem...' 
-                onChange={(e) => {this.setState({lastname: e.target.value})}}
+                onChange={(e) => {this.setState({message: e.target.value})}}
               />
             </Form.Field>
           </Wrapper>
@@ -207,10 +219,12 @@ class Register extends Component {
           )}
           <Error>{this.state.formErrors.invalidError}</Error>
         </Form>
+        
       </Container>
+      <Footer/>
       </>
     )
   }
 }
 
-export default Register
+export default Contact

@@ -14,7 +14,7 @@ const inputStyle = {
 }
 
 const mobileStyle = {
-  width: '175px',
+  width: '90%',
   paddingTop: '9px',
   paddingBottom: '8px'
 }
@@ -118,7 +118,7 @@ class NavBar2 extends Component {
     if (this.state.isAdmin === 'false') {
       return (
         <>
-          <StyledDropdown title="Menu" variant="warning" drop="left">
+          <StyledDropdown title="Menu" variant="primary" drop="left">
             <Dropdown.Item onClick={() => {this.props.history.push('/post')}}>Post</Dropdown.Item>
             <Dropdown.Item onClick={() => {this.props.history.push('/mylistings')}}>My Listings</Dropdown.Item>
             <Dropdown.Item onClick={() => {this.props.history.push('/messages')}}>Messages</Dropdown.Item>
@@ -130,7 +130,7 @@ class NavBar2 extends Component {
     if (this.state.isAdmin === 'true') {
       return (
         <>
-          <StyledDropdown title="Menu" variant="warning" drop="left">
+          <StyledDropdown title="Menu" variant="primary" drop="left">
             <Dropdown.Item onClick={() => {this.props.history.push('/users')}}>Users</Dropdown.Item>
             <Dropdown.Item onClick={() => {this.props.history.push('/listings')}}>Listings</Dropdown.Item>
             <Dropdown.Item onClick={() => {this.props.history.push('/reviewlistings')}}>Pending Listings</Dropdown.Item>
@@ -142,21 +142,13 @@ class NavBar2 extends Component {
     if (this.state.isAdmin === null) {
       return (
         <>
-          <a href={`/virtual`}>
-            <LinkDiv style={{margin: '5px'}}>Experiências Virtuais</LinkDiv>
-          </a>
-          <a href={`/blog`}>
-            <LinkDiv style={{margin: '5px'}}>Blog</LinkDiv>
-          </a>
-          <a href={`/contact`}>
-            <LinkDiv style={{margin: '5px'}}>Contato</LinkDiv>
-          </a>
-          <a href={`/about`}>
-            <LinkDiv style={{margin: '5px'}}>Sobre</LinkDiv>
-          </a>
-          <StyledButton onClick={() => {this.props.history.push('/login')}} >Entre</StyledButton>
-          <StyledButton onClick={() => {this.props.history.push('/register')}} >Cadastre-se</StyledButton>
-          {/* <Button style={{margin: '5px'}} onClick={() => {this.props.history.push('/register')}} inverted>Sign Up</Button> */}
+          <StyledDropdown title="Menu" variant="primary" drop="left">
+            <Dropdown.Item onClick={() => {this.props.history.push('/virtual')}}>Experiências Virtuais</Dropdown.Item>
+            <Dropdown.Item onClick={() => {this.props.history.push('/blog')}}>Blog</Dropdown.Item>
+            <Dropdown.Item onClick={() => {this.props.history.push('/contact')}}>Contato</Dropdown.Item>
+            <Dropdown.Item onClick={() => {this.props.history.push('/login')}}>Entre</Dropdown.Item>
+            <Dropdown.Item onClick={() => {this.props.history.push('/register')}}>Cadastre-se</Dropdown.Item>
+          </StyledDropdown>
         </>
       )
     }
@@ -169,10 +161,17 @@ class NavBar2 extends Component {
     //mobile view
     if (isMobile) {
       return (
+        <>
         <Container>
           <LeftMobile>
             <Nav to="/"><ImageMobile src={logo} height="45"  alt="logo"/></Nav>
           </LeftMobile>
+          <MiddleMobile></MiddleMobile>
+          <RightMobile>
+            {this.getNavMobile()}
+          </RightMobile>
+        </Container>
+        <Container>
           <MiddleMobile>
             <form onSubmit={this.handleSearch}>
               <Input 
@@ -180,17 +179,15 @@ class NavBar2 extends Component {
                 size='large'
                 action={{ icon: 'search' }} 
                 name="search"
-                placeholder='Cidade, Caverna ou Parque' 
+                placeholder='UF, Cidade, Caverna ou Parque' 
                 value={this.props.queue}
                 onChange={this.props.changeQueue}
                 maxLength="60"
               />
             </form>
           </MiddleMobile>
-          <RightMobile>
-            {this.getNavMobile()}
-          </RightMobile>
         </Container>
+        </>
       )
     } else {
       
@@ -208,7 +205,7 @@ class NavBar2 extends Component {
                 size='large'
                 action={{ icon: 'search' }} 
                 name="search"
-                placeholder='Cidade, Caverna ou Parque' 
+                placeholder='UF, Cidade, Caverna ou Parque' 
                 value={this.props.queue}
                 onChange={this.props.changeQueue}
                 maxLength="60"

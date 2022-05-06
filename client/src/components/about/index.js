@@ -2,10 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 import NavBar2 from '../navbar/navBar2'
 import img from './assets/peter-profile.jpg'
+import Footer from '../footer'
 
 const Container = styled.div`
   background-color: #FFFFFF;
-  margin: auto;
+  margin: 50px 10px 100px 30px;
   height: 50%;
   width: 75%;
   border-radius: 5px;
@@ -14,7 +15,7 @@ const Container = styled.div`
 `
 
 const Title = styled.h1`
-  margin: 100px 0 0 0;
+  margin: 120px 0 0 0;
 `
 
 const ProfileImage = styled.div`
@@ -33,7 +34,7 @@ export default class Ecaves extends React.Component {
       <>
       <NavBar2/>
       <Container>
-        <Title><br/><br/><br/>Sobre o ECaves<br/><br/></Title>
+        <Title><br/>Sobre o eCaves<br/><br/></Title>
         
         <p>O ecaves surgiu com o propósito de ser uma ferramenta de facilitação de acesso às
 informações sobre cavernas turísticas e as áreas onde elas se inserem.
@@ -75,6 +76,7 @@ a conservação da natureza.</p>
 <p>O ecaves, enquanto plataforma, vem promover a difusão de informações, estimulando que
 mais pessoas conheçam e se interessem pelo patrimônio espeleológico.</p>
       </Container>
+      <Footer/>
       </>
     )
   }

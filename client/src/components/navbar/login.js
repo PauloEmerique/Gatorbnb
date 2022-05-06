@@ -3,7 +3,9 @@ import { Button, Form, Grid, Header, Message, Segment, Label, Loader } from 'sem
 import styled from 'styled-components'
 import { Link, Redirect } from 'react-router-dom'
 import NavBar from './navBar'
+import NavBar2 from './navBar2'
 import axios from 'axios'
+import Footer from '../footer'
 
 const Container = styled.div`
   max-width: 600px;
@@ -11,6 +13,7 @@ const Container = styled.div`
   padding-right: 10px;
   margin: auto;
   margin-top: 5%;
+  margin-bottom: 5%;
 `
 
 const StyledButton = styled(Button)`
@@ -117,12 +120,12 @@ class Login extends Component {
 
     return (
       <>
-      <NavBar />
+      <NavBar2 />
       <Container>
         <Grid>
           <Grid.Column style={{ width: '630px' }}>
             <Header as='h2' color='black' textAlign='center'>
-              Log-in to your account
+              Entre na sua conta
             </Header>
             <Form size='large' onSubmit={this.handleLogin}>
               <Segment stacked>
@@ -150,19 +153,20 @@ class Login extends Component {
                   onChange={(e) => {this.setState({password: e.target.value})}}
                 />
                 {this.state.isLoading === false ? (
-                  <StyledButton fluid size='large'type="submit">Log In</StyledButton>
+                  <StyledButton fluid size='large'type="submit">Entrar</StyledButton>
                 ) : (
                   <Loader active inline='centered' />
                 )}
               </Segment>
             </Form>
             <Message style={{textAlign: 'right'}}>
-              New to us? <Link to="/register" style={{ paddingLeft: '5px'}}>Create an account</Link>
+              Novo por aqui ? <Link to="/register" style={{ paddingLeft: '5px'}}>Crie uma conta</Link>
             </Message>
           </Grid.Column>
         </Grid>
         <Invalid>{this.state.formErrors.invalidError}</Invalid>
       </Container>
+      <Footer/>
       </>
     )
     }

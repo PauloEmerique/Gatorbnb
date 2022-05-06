@@ -9,6 +9,7 @@ export const Column = styled.div`
   flex-direction: column;
   margin: 10px 10px 10px 10px ;
   background-color: white;
+  padding: 20px 20px 20px 20px ;
 `
 
 export const RightColumn = styled.div`
@@ -40,6 +41,11 @@ export const StyledContainer = styled.div`
   heigth: 500px;
 `
 
+export const StyledContainerMobile = styled.div`
+  width: 100%;
+  ${'' /* heigth: 500px; */}
+`
+
 export const Title = styled.div`
   text-align: center;
   ${'' /* border-bottom: 1px solid grey; */}
@@ -64,7 +70,6 @@ export const Image = styled.img`
   cursor: pointer;
   width: 100%;
   
-  display: fixed;
   margin: auto;
   :hover {
     opacity: 0.85;
@@ -83,18 +88,31 @@ export const Overview = styled.div`
   margin: 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid grey;
-  margin: 20px 20px 30px 20px;
+  margin: 20px 20px 30px 0px;
+  padding-right: 20px;
 `
 export const DetailsCaption = styled.span`
   font-size: 17px;
   font-weight: bold;
   display: block;
-  margin: 15px 10px 5px 20px;
+  margin-top: 15px;
+  margin-bottom: 5px;
 `
 
 export const Details = styled.span`
+  width: 90%;
+  font-size: 14px;
+  line-height: 1.0;
+  ${'' /* display: block; */}
+  ${'' /* margin: 20px 20px 30px 20px; */}
+  text-indent: 0;
+  margin-right: 0px;
+`
+
+export const DetailsBold = styled.span`
   width: 80%;
-  font-size: 15px;
+  font-size: 14px;
+  font-weight: bold;
   line-height: 1.5;
   ${'' /* display: block; */}
   margin: 20px 20px 30px 20px;
@@ -108,15 +126,37 @@ export const DetailsArea = styled.span`
   margin: 20px 20px 30px 20px;
 `
 
-export const InfoItem = styled.span`
+export const InfoGroup = styled.div`
+  margin: 5px 5px 5px 5px;
+  ${'' /* flush: left; */}
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: top;
+  justify-content: flex-start;
+`
+
+export const InfoItem = styled.div`
   font-size: 16px;
+  width: 40px;
+  max-width: 40px;
   font-weight: bold;
   ${'' /* display: block; */}
-  margin: 5px 5px 5px 5px;
+  margin: 0px 10px 15px 0px;
+  ${'' /* flush: left; */}
+  flex: 1;
+`
+
+export const InfoName = styled.span`
+  font-size: 9px;
+  font-weight: normal;
+  ${'' /* display: block; */}
+  margin: 0px 0px 0px 0px;
+  line-height: 1.0;
 `
 
 export const Description = styled.div`
-  width: 100%;
+  width: 70%;
   margin: 10 100px 0 100px;
   font-size: 15px;
 `
@@ -129,7 +169,7 @@ export const Map = styled.div`
   padding-top: 0px;
   margin-top: 0px;
   vertical-align: top;
-  height: 80%;
+  height: 100%;
 `
 
 export const TagsTitle = styled.div`

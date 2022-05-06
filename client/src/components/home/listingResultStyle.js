@@ -25,15 +25,15 @@ export const Card = styled.div`
 export const DivLeft = styled.div`
 
   display: inline-block;
-  margin: 10px 5px 10px 15px;
+  margin: 10px 5px 10px 10px;
   float: left;
 `
 
 export const DivInfo = styled.div`
-  width: 80%;
+  width: 90%;
   ${'' /* heigth: 50% */}
   display: block;
-  margin: 10px 5px 10px 15px;
+  margin: 10px 20px 10px 20px;
   float: left;
 `
 
@@ -104,7 +104,7 @@ export const InfoArea = styled.div`
   font-size: 16px;
   font-weight: bold;
   ${'' /* display: block; */}
-  margin: 5px 20px 10px 0px;
+  margin: 5px 0px 10px 0px;
   display: block;
   text-align: left;
   align: left;
