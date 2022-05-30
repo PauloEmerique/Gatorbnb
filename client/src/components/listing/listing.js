@@ -505,6 +505,7 @@ class Listing extends Component {
               {this.DetailSection('No entorno',this.state.listing[0].visitSurroungindActivities)}
               <DetailsCaption>Telefone</DetailsCaption><Details>{this.state.listing[0].contactPhone}</Details>
               <DetailsCaption>Site</DetailsCaption><Details dangerouslySetInnerHTML={{ __html: this.state.listing[0].contactSite}}/>
+              {this.DetailSection('Saiba mais',this.state.listing[0].knowMore)}{this.DetailSection('Saiba mais',this.state.listing[0].knowMore)}
               </>
             )}
           

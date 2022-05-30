@@ -6,6 +6,7 @@ import About from './navbar/about'
 import logo from './navbar/img/logo-ecaves.png'
 import Background from './home/assets/digital-illustration-brian-edward-miller-6.jpg'
 import ListingResult from './home/listingResult'
+import ListingUc from './home/listingUc'
 import {appConfig} from '../config/app-config'
 import LogoGallery from './logoGallery'
 import NavBar2 from './navbar/navBar2'
@@ -244,6 +245,7 @@ export default class Landing extends Component {
     isAuth: localStorage.getItem('isAuth'),
     isAdmin: localStorage.getItem('isAdmin'),
     listings: [],
+    ucs: [],
     splashs: [],
     noResults: false,
     loadingSplash: true,
@@ -280,8 +282,10 @@ export default class Landing extends Component {
       lon=position.coords.longitude;
       console.log("Longitude is :", position.coords.longitude);
       console.log("will get listings");
+      this.getUcs(lat,lon);
       this.getListings(lat,lon);
     });
+    this.getUcs(lat,lon);
     this.getListings(lat,lon);
   }
 
@@ -338,6 +342,24 @@ export default class Landing extends Component {
       })
   }
 
+  getUcs = (lat,lon) => {
+    axios.get(`${appConfig.apiEndpoint}/homeuc?lat=${lat}&lon=${lon}`)
+      .then(res => {
+        if (res.data.length === 0) {
+          this.setState({ noResults: true})
+        }
+        else {
+          let listingsTemp = res.data
+          this.setState({
+              ucs: listingsTemp,
+              loading: false
+          })
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
 
   getNav = () => {
     if (this.state.isAdmin === 'true') {
@@ -439,7 +461,9 @@ export default class Landing extends Component {
                 <ImageBanner src={`https://ads.ecavesbrasil.com.br/www/delivery/avw.php?zoneid=2&amp;cb=${cacheBlocker()}&amp;n=a0ea7b26`} alt="thumbnail" ></ImageBanner>
               </a>
             </div>
-            <SectionHeader>Para Visitar</SectionHeader>
+            <SectionHeader>Parques e Unidades de Conservação</SectionHeader>
+            <ListingUc results={this.state.ucs}/>
+            <SectionHeader>Cavernas para Visitar</SectionHeader>
             <ListingResult results={this.state.listings}/>
             <Footer/>
         </ListingContainer>

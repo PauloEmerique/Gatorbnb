@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Alert } from 'react-bootstrap'
 import ListingResult from './listingResult'
+import ListingUc from './listingUc'
 import NavBar2 from '../navbar/navBar2'
 import Filter from './filter'
 import Search from './search'
@@ -42,6 +43,7 @@ class Home extends Component {
 
   state = {
     listings: [],
+    ucs: [],
     noResults: false,
     filter: false,
     queue: '',
@@ -111,13 +113,14 @@ class Home extends Component {
   getListings = (value, lat, lon) => {
     axios.get(`${appConfig.apiEndpoint}/search/${value}&lat=${lat}&lon=${lon}`)
       .then(res => {
-        if (res.data.length === 0) {
+        if ((res.data.caves.length === 0) && (res.data.ucs.length === 0)) {
           this.setState({ noResults: true})
         }
         else {
           let listingsTemp = res.data
           this.setState({
-              listings: listingsTemp
+              listings: listingsTemp.caves,
+              ucs: listingsTemp.ucs
           })
           // let temp = []
           // listingsTemp.forEach(list => {
@@ -260,12 +263,12 @@ class Home extends Component {
         return (
           <>
             <NavBar2 queue={this.state.queue} changeQueue={this.changeQueue} />
-            <Search handleFilter={this.toggleFilter} />
-            {this.showFilter()}
+            {/* <Search handleFilter={this.toggleFilter} />
+            {this.showFilter()} */}
             <ContainerMobile>
               <Alert style={alertStyle} variant="warning">
-                <Alert.Heading>No matching results...</Alert.Heading>
-                <p>Please check your spelling or enter a valid city or ZIP code.</p>
+                <Alert.Heading>Nenhum resultado para sua busca...</Alert.Heading>
+                <p>Verifique o termo digitado, pode ser a sigla de um Estado, ou o nome parcial de uma Cidade, Caverna ou Parque</p>
               </Alert>
             </ContainerMobile>
           </>
@@ -274,11 +277,25 @@ class Home extends Component {
         return (
           <>
             <NavBar2 queue={this.state.queue} changeQueue={this.changeQueue} />
-            <Search handleFilter={this.toggleFilter} />
-            {this.showFilter()}
+            {/* <Search handleFilter={this.toggleFilter} />
+            {this.showFilter()} */}
+
+            {this.state.ucs.length>0 && 
+            <>
+            <Title>Parques e Unidades de Conservação</Title>
+            <ContainerMobile>
+              <ListingUc results={this.state.ucs}/>
+            </ContainerMobile>
+            </>
+            }
+            {this.state.listings.length>0 && 
+            <>
+            <Title>Cavernas</Title>
             <ContainerMobile>
               <ListingResult results={this.state.listings}/>
             </ContainerMobile>
+            </>
+            }
           </>
         )
       }
@@ -291,12 +308,12 @@ class Home extends Component {
           <NavBar2 queue={this.state.queue} changeQueue={this.changeQueue} />
           {/* <Filter {...props}/> */}
           
-          <Results>
+          <Container>
             <Alert style={alertStyle} variant="warning">
               <Alert.Heading>Nenhum resultado para sua busca...</Alert.Heading>
               <p>Verifique o termo digitado, pode ser a sigla de um Estado, ou o nome parcial de uma Cidade, Caverna ou Parque</p>
             </Alert>
-          </Results>
+          </Container>
         </>
       )
     } else {
@@ -305,10 +322,22 @@ class Home extends Component {
           <NavBar2 queue={this.state.queue} changeQueue={this.changeQueue} />
           {/* <Filter {...props} /> */}
           <br/><br/>
-          <Title>Resultados da busca</Title>
+          {this.state.ucs.length>0 && 
+          <>
+          <Title>Parques e Unidades de Conservação</Title>
+          <Container>
+            <ListingUc results={this.state.ucs}/>
+          </Container>
+          </>
+          }
+          {this.state.listings.length>0 && 
+          <>
+          <Title>Cavernas</Title>
           <Container>
             <ListingResult results={this.state.listings}/>
           </Container>
+          </>
+          }
           <Footer/>
         </>
       )
