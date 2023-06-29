@@ -13,6 +13,8 @@ import Slider from './slider'
 import {appConfig} from '../../config/app-config'
 import axios from 'axios'
 import Footer from "../footer";
+import ReactGA from "react-ga4";
+import {Helmet} from "react-helmet";
 
 
 import icon_whats from '../../assets/images/whats.jpg'
@@ -77,6 +79,9 @@ class Area extends Component {
     // script.async = true;    
     // script.text = "$(\".image-gallery-slide\").each(function( index ) {console.log( index + \": \" + $( this ).attr(\"class\") ); $( this ).hide() });"; 
     // this.div.appendChild(script);
+    ReactGA.initialize("G-F2D9Y4RRMY");
+    ReactGA.send("uc");
+    console.log("just called GA4")
   }
 
   // xcomponentDidMount() {
@@ -136,6 +141,8 @@ class Area extends Component {
         <>
         {/* <div className="App" ref={el => (this.div = el)}>
         </div> */}
+
+
   
         <NavBar2 />
         {this.state.loading ? (
@@ -162,6 +169,9 @@ class Area extends Component {
                 </Placeholder>
               ) : (
                 <>
+                  <Helmet>
+                    <title>UC {this.state.listing[0].name}</title>
+                  </Helmet>
                   <Title>{this.state.listing[0].name}</Title>
                   <SubTitle>({this.state.listing[0].areaType})</SubTitle>
                   <SubTitle>{this.state.listing[0].city} / {this.state.listing[0].state}</SubTitle>
@@ -330,6 +340,9 @@ class Area extends Component {
               </Placeholder>
             ) : (
               <>
+                <Helmet>
+                    <title>UC {this.state.listing[0].name}</title>
+                </Helmet>
                 <Title>{this.state.listing[0].name}</Title>
                 <SubTitle>({this.state.listing[0].areaType})</SubTitle>
                 <SubTitle>{this.state.listing[0].city} / {this.state.listing[0].state}</SubTitle>

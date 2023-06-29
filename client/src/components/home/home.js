@@ -7,9 +7,9 @@ import Filter from './filter'
 import Search from './search'
 import styled from 'styled-components'
 import axios from 'axios'
-import ReactGA from 'react-ga'
 import {appConfig} from '../../config/app-config'
 import Footer from '../footer'
+
 
 const queryString = require('query-string')
 

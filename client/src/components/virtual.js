@@ -9,6 +9,8 @@ import ListingResult from './home/listingResult'
 import {appConfig} from '../config/app-config'
 import LogoGallery from './logoGallery';
 import NavBar2 from './navbar/navBar2'
+import ReactGA from "react-ga4";
+import {Helmet} from "react-helmet";
 
 
 const StyledButton = styled(Button)`
@@ -237,6 +239,9 @@ export default class Virtual extends Component {
 
   componentDidMount() {
     this.getListings();
+    ReactGA.initialize("G-F2D9Y4RRMY");
+    ReactGA.send("virtual");
+    console.log("just called GA4")
   }
 
   getListings = (lat,lon) => {
@@ -309,6 +314,9 @@ export default class Virtual extends Component {
   render() {
     return (
       <>
+        <Helmet>
+          <title>Virtual</title>
+        </Helmet>
         <NavBar2/>
         <Container>
         <br/><br/>

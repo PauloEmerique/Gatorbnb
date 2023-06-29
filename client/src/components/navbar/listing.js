@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import ReactGA from "react-ga4";
 
 
 const ShadowedBox = styled.p`

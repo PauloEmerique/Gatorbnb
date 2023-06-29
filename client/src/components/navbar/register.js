@@ -6,6 +6,10 @@ import NavBar from './navBar'
 import NavBar2 from './navBar2'
 import axios from 'axios'
 import Footer from '../footer'
+import {appConfig} from '../../config/app-config'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const Container = styled.div`
   max-width: 600px;
@@ -77,6 +81,11 @@ class Register extends Component {
     }
   }
 
+  
+  notify = () => toast("Conta Criada!",{
+    onClose: () => this.props.history.push('/')
+  });
+
   validate = () => {
     let isError = false
     const { email, firstname, lastname, password, check, formErrors } = this.state
@@ -123,20 +132,25 @@ class Register extends Component {
     e.preventDefault()
     const err = this.validate()
     if (!err && this.state.check === true) {
+      // axios.get(`${appConfig.apiEndpoint}/usercreate`)
       this.setState({ isLoading: true })
-      axios.post('/api/user/register', {
+      axios.post(`${appConfig.apiEndpoint}/usercreate`, {
         email: this.state.email,
         firstname: this.state.firstname,
         lastname: this.state.lastname,
         password: this.state.password,
       })
         .then(res => {
-          localStorage.setItem('user_id', res.data.user_id)
-          localStorage.setItem('isAuth', 'true')
-          localStorage.setItem('isAdmin', 'false')
-          this.props.history.push('/')
-        })
+            // localStorage.setItem('user_id', res.data.user_id)
+            localStorage.setItem('user_id', 0)
+            localStorage.setItem('isAuth', 'true')
+            localStorage.setItem('isAdmin', 'false')
+            this.setState({ isLoading: false })
+            this.notify()
+            // this.props.history.push('/')
+          })
         .catch(err => {
+          this.setState({ isLoading: false })
           if (err.response.data === 'email already used') {
             this.setState({ isLoading: false })
             this.setState(Object.assign(this.state.formErrors, {invalidError: 'Email already used'} ))
@@ -158,7 +172,7 @@ class Register extends Component {
 
     if (this.state.isAuth === 'true') {
       return (
-        <Redirect to="/404"/>
+        <Redirect to="/"/>
       )
     } else {
 
@@ -168,7 +182,9 @@ class Register extends Component {
       <Container>
         <Form onSubmit={this.handleRegister}>
           <Title>Crie sua Conta</Title>
-          <Warn>em breve ...</Warn>
+          {/* <Warn>em breve ...</Warn> */}
+          {/* <button onClick={notify}>Notify!</button> */}
+          <ToastContainer />
           <Wrapper>
             <Form.Field>
               <label>E-mail</label>
@@ -176,7 +192,6 @@ class Register extends Component {
                 <Label basic color='red' pointing='below'>{formErrors.emailError}</Label>
               )}
               <Form.Input 
-                disabled
                 maxLength="30"
                 fluid icon='user' 
                 iconPosition='left' 
@@ -190,7 +205,6 @@ class Register extends Component {
                 <Label basic color='red' pointing='below'>{formErrors.fnameError}</Label>
               )}
               <Form.Input 
-                disabled
                 maxLength="30"
                 fluid icon='user' 
                 iconPosition='left' 
@@ -204,7 +218,6 @@ class Register extends Component {
                 <Label basic color='red' pointing='below'>{formErrors.lnameError}</Label>
               )}
               <Form.Input 
-                disabled
                 maxLength="30"
                 fluid icon='user' 
                 iconPosition='left' 
@@ -218,7 +231,6 @@ class Register extends Component {
                 <Label basic color='red' pointing='below'>{formErrors.passwordError}</Label>
               )}
               <Form.Input 
-                disabled
                 maxLength="30"
                 fluid icon='lock' 
                 iconPosition='left' 
@@ -226,14 +238,14 @@ class Register extends Component {
                 type='password' 
                 onChange={(e) => {this.setState({password: e.target.value})}}
               />
-              <Checkbox disabled label='Eu concordo com os TERMOS E CONDIÇÕES' onChange={() => {this.setState({ check: !this.state.check })}}/>
+              <Checkbox  label='Eu concordo com os TERMOS E CONDIÇÕES' onChange={() => {this.setState({ check: !this.state.check })}}/>
               {formErrors.checkError.length > 0 && (
                 <Label basic color='red' pointing='left'>{formErrors.checkError}</Label>
               )}
             </Form.Field>
           </Wrapper>
           {this.state.isLoading === false ? (
-            <StyledButton disabled fluid size='large' type="submit">Criar Conta</StyledButton>
+            <StyledButton  fluid size='large' type="submit">Criar Conta</StyledButton>
           ) : (
             <Loader style={{ marginTop: '10px'}} active inline='centered' />
           )}

@@ -6,6 +6,7 @@ import NavBar from './navBar'
 import NavBar2 from './navBar2'
 import axios from 'axios'
 import Footer from '../footer'
+import {appConfig} from '../../config/app-config'
 
 const Container = styled.div`
   max-width: 600px;
@@ -78,32 +79,36 @@ class Login extends Component {
     const err = this.validate()
     if (!err) {
       this.setState({ isLoading: true })
-      axios.post('/api/user/login', {
+      axios.post(`${appConfig.apiEndpoint}/userlogin`, {
         email: this.state.email,
         password: this.state.password
       })
         .then(res => {
+          console.log(`user_id ${res.data.user_id}`)
           localStorage.setItem('user_id', res.data.user_id)
           localStorage.setItem('isAuth', res.data.isAuthenticated)
-          axios.get('/api/user/admin')
-            .then(res => {
-              if (res.data === true) {
-                localStorage.setItem('isAdmin', 'true')
-                this.props.history.push('/reviewlistings')
-              } else {
-                localStorage.setItem('isAdmin', 'false')
-                this.props.history.push('/')
-              }
-            })
+          this.setState({ isLoading: false })
+          // axios.get('/api/user/admin')
+          //   .then(res => {
+          //     if (res.data === true) {
+          //       localStorage.setItem('isAdmin', 'true')
+          //       this.props.history.push('/reviewlistings')
+          //     } else {
+          //       localStorage.setItem('isAdmin', 'false')
+          //       this.props.history.push('/')
+          //     }
+          //   })
         })
         .catch(err => {
-          if (err.response.data === 'login failed') {
-            this.setState({ isLoading: false })
-            this.setState(Object.assign(this.state.formErrors, {invalidError: 'Invalid email or password'} ))
-          }
-          console.log(err.response.data)
+          this.setState({ isLoading: false })
+          this.setState(Object.assign(this.state.formErrors, {invalidError: 'Email ou Senha inválidos'} ))
+          // if (err.response.isAuthenticated === false) {
+          //   this.setState(Object.assign(this.state.formErrors, {invalidError: 'Invalid email or password'} ))
+          // }
+          console.log(err.response)
         })
     } else {
+      this.setState({ isLoading: false })
       console.log('Submission Error')
     }
 

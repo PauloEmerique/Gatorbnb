@@ -15,8 +15,8 @@ import axios from 'axios'
 import Footer from "../footer";
 
 import icon_whats from '../../assets/images/whats.jpg'
-
-
+import ReactGA from "react-ga4";
+import {Helmet} from "react-helmet";
 
 
 // import "react-image-gallery/styles/scss/image-gallery.scss";
@@ -73,6 +73,9 @@ class Listing extends Component {
     window.scrollTo(0, 0)
     const { handle } = this.props.match.params
     this.getListing(handle)
+    ReactGA.initialize("G-F2D9Y4RRMY");
+    ReactGA.send("cave");
+    console.log("just called GA4")
   }
 
 
@@ -239,6 +242,9 @@ class Listing extends Component {
                 </Placeholder>
               ) : (
                 <>
+                  <Helmet>
+                    <title>Cave {this.state.listing[0].name}</title>
+                  </Helmet>
                   <Title>{this.state.listing[0].name}</Title>
                   <SubTitle>{this.state.listing[0].city} / {this.state.listing[0].state} - <Link to={`/area/${this.state.listing[0].uc.id}`} key={this.state.listing[0].id}>{this.state.listing[0].uc.name}</Link></SubTitle>
                   {/* <Details></Details> */}
@@ -413,6 +419,9 @@ class Listing extends Component {
               </Placeholder>
             ) : (
               <>
+                <Helmet>
+                    <title>Cave {this.state.listing[0].name}</title>
+                </Helmet>
                 <Title>{this.state.listing[0].name}</Title>
                 <SubTitle>{this.state.listing[0].city} / {this.state.listing[0].state} - <Link to={`/area/${this.state.listing[0].uc.id}`} key={this.state.listing[0].id}>{this.state.listing[0].uc.name}</Link></SubTitle>
                 {/* <Details></Details> */}

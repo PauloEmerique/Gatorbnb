@@ -12,6 +12,9 @@ import LogoGallery from './logoGallery'
 import NavBar2 from './navbar/navBar2'
 import Footer from './footer'
 import MediaGallery from './listing/mediaGallery';
+import ReactGA from "react-ga4";
+import {Helmet} from "react-helmet";
+
 
 const style = {
   position: 'static'
@@ -287,6 +290,9 @@ export default class Landing extends Component {
     });
     this.getUcs(lat,lon);
     this.getListings(lat,lon);
+    ReactGA.initialize("G-F2D9Y4RRMY");
+    ReactGA.send("home");
+    console.log("just called GA4")
   }
 
 
@@ -408,6 +414,9 @@ export default class Landing extends Component {
   render() {
     return (
       <>
+        <Helmet>
+           <title>Home</title>
+        </Helmet>
         <Container>
           {/* <Nav>
             <LeftColumn>
